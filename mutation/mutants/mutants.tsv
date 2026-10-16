@@ -1,0 +1,11 @@
+id	name	requirement	misconception
+M01	PEND_CLEAR_BEATS_SET	R-PRI-4, R-INT-2	Software W1C clear given priority over the hardware expiration set of PEND.
+M02	OVF_USES_POSTCLEAR_PEND	R-INT-3	OVF set condition looks at PEND after a same-cycle W1C clear instead of the held PEND.
+M03	RELOAD_USES_WRITTEN_LOAD	R-TMR-11	Periodic reload transfer takes the value being written to LOAD in the same cycle (new SHADOW) instead of the held SHADOW.
+M04	SW_EN_BEATS_ONESHOT_COMPLETION	R-PRI-2	A coincident CTRL write of EN wins over the one-shot completion clearing EN.
+M05	LEVEL_SENSITIVE_START	R-TMR-10, R-TMR-7	Any CTRL write with EN=1 is treated as a start (reload + PCNT clear), even when already enabled.
+M06	START_KEEPS_PRESCALER_PHASE	R-TMR-7	A start reloads COUNT and ACTIVE but does not clear PCNT, so a re-enabled timer resumes its old prescaler phase.
+M07	PRESCALER_EQUALITY_COMPARE	R-TMR-13, R-TMR-1	Tick uses PCNT == PSC instead of PCNT >= PSC, so lowering PSC below PCNT misses ticks until PCNT wraps.
+M08	RESTART_REQUIRES_EN	R-TMR-9	CMD.RESTART is ignored while the timer is stopped (EN=0).
+M09	IE_GATES_PEND	R-INT-7, R-INT-1	The interrupt-enable mask is applied to the status flag: expirations with IE=0 do not set PEND.
+M10	IRQ_REGISTERED	R-INT-6	irq is registered (APB-template habit), so it lags PEND & IE by one cycle.

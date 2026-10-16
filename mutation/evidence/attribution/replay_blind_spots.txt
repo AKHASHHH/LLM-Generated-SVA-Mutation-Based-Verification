@@ -1,0 +1,10 @@
+1. transitions not matching the spec model: 79; all into rst=0 rows: True
+2. reset rows where PEND&IE changes at the rising edge just before the reset (M10 exposure):
+   cycle 1397: edge 13975 ns, reset 13980 ns: reference irq=1, M10 irq=0
+   cycle 3546: edge 35465 ns, reset 35470 ns: reference irq=0, M10 irq=1
+   cycle 6149: edge 61495 ns, reset 61500 ns: reference irq=0, M10 irq=1
+   cycle 6282: edge 62825 ns, reset 62830 ns: reference irq=1, M10 irq=0
+   cycle 7309: edge 73095 ns, reset 73100 ns: reference irq=0, M10 irq=1
+3. M08, last row held after the vectors end: {'rst': 1, 'psel': 1, 'pen': 1, 'pwr': 1, 'addr': 16, 'wdata': 3}
+   cycle 8348: reference ACT=0x0 CNT=0x0 PCNT=0x0 | M08 ACT=0x5 CNT=0x5 PCNT=0x18
+   cycle 8349: reference ACT=0x0 CNT=0x0 PCNT=0x0 | M08 ACT=0x5 CNT=0x5 PCNT=0x18

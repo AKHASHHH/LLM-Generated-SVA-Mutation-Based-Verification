@@ -1,0 +1,1055 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+
+-- Executing script file `async2sync.ys' --
+
+1. Executing Verilog-2005 frontend: ref_m.sv
+Parsing formal SystemVerilog input from `ref_m.sv' to AST representation.
+Generating RTLIL representation for module `\ref_m'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl_claude_1.sv
+Parsing formal SystemVerilog input from `rtl_claude_1.sv' to AST representation.
+Generating RTLIL representation for module `\rtl_claude_1'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl_claude_2.sv
+Parsing formal SystemVerilog input from `rtl_claude_2.sv' to AST representation.
+Generating RTLIL representation for module `\rtl_claude_2'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl_gpt_1.sv
+Parsing formal SystemVerilog input from `rtl_gpt_1.sv' to AST representation.
+Generating RTLIL representation for module `\rtl_gpt_1'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl_gpt_2.sv
+Parsing formal SystemVerilog input from `rtl_gpt_2.sv' to AST representation.
+Generating RTLIL representation for module `\rtl_gpt_2'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: top.sv
+Parsing formal SystemVerilog input from `top.sv' to AST representation.
+Generating RTLIL representation for module `\top'.
+Successfully finished Verilog frontend.
+
+7. Executing PREP pass.
+
+7.1. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1.1. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \rtl_gpt_2
+Used module:     \rtl_gpt_1
+Used module:     \rtl_claude_2
+Used module:     \rtl_claude_1
+Used module:     \ref_m
+
+7.1.2. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \rtl_gpt_2
+Used module:     \rtl_gpt_1
+Used module:     \rtl_claude_2
+Used module:     \rtl_claude_1
+Used module:     \ref_m
+Removed 0 unused modules.
+Module top directly or indirectly contains formal properties -> setting "keep" attribute.
+
+7.2. Executing PROC pass (convert processes to netlists).
+
+7.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+7.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 7 switch rules as full_case in process $proc$rtl_gpt_2.sv:74$257 in module rtl_gpt_2.
+Marked 2 switch rules as full_case in process $proc$rtl_gpt_2.sv:56$252 in module rtl_gpt_2.
+Marked 7 switch rules as full_case in process $proc$rtl_gpt_1.sv:73$203 in module rtl_gpt_1.
+Marked 2 switch rules as full_case in process $proc$rtl_gpt_1.sv:57$200 in module rtl_gpt_1.
+Marked 7 switch rules as full_case in process $proc$rtl_claude_2.sv:84$150 in module rtl_claude_2.
+Marked 2 switch rules as full_case in process $proc$rtl_claude_2.sv:54$133 in module rtl_claude_2.
+Marked 7 switch rules as full_case in process $proc$rtl_claude_1.sv:84$92 in module rtl_claude_1.
+Marked 2 switch rules as full_case in process $proc$rtl_claude_1.sv:68$91 in module rtl_claude_1.
+Marked 1 switch rules as full_case in process $proc$rtl_claude_1.sv:37$63 in module rtl_claude_1.
+Marked 1 switch rules as full_case in process $proc$ref_m.sv:119$60 in module ref_m.
+Marked 7 switch rules as full_case in process $proc$ref_m.sv:84$42 in module ref_m.
+Marked 1 switch rules as full_case in process $proc$ref_m.sv:63$39 in module ref_m.
+Removed a total of 0 dead cases.
+
+7.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 18 redundant assignments.
+Promoted 25 assignments to connections.
+
+7.2.4. Executing PROC_INIT pass (extract init attributes).
+
+7.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \PRESETn in `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+Found async reset \PRESETn in `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+Found async reset \PRESETn in `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+Found async reset \PRESETn in `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+Found async reset \PRESETn in `\ref_m.$proc$ref_m.sv:119$60'.
+
+7.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~70 debug messages>
+
+7.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\top.$proc$top.sv:12$267'.
+Creating decoders for process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+     1/10: $0\count[15:0]
+     2/10: $0\active[15:0]
+     3/10: $0\shadow[15:0]
+     4/10: $0\pcnt[7:0]
+     5/10: $0\psc[7:0]
+     6/10: $0\ovf[0:0]
+     7/10: $0\pend[0:0]
+     8/10: $0\ie[0:0]
+     9/10: $0\mode[0:0]
+    10/10: $0\en[0:0]
+Creating decoders for process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:56$252'.
+     1/2: $2\PRDATA[31:0]
+     2/2: $1\PRDATA[31:0]
+Creating decoders for process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+     1/10: $0\count[15:0]
+     2/10: $0\active[15:0]
+     3/10: $0\shadow[15:0]
+     4/10: $0\pcnt[7:0]
+     5/10: $0\psc[7:0]
+     6/10: $0\ovf[0:0]
+     7/10: $0\pend[0:0]
+     8/10: $0\ie[0:0]
+     9/10: $0\mode[0:0]
+    10/10: $0\en[0:0]
+Creating decoders for process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:57$200'.
+     1/2: $2\PRDATA[31:0]
+     2/2: $1\PRDATA[31:0]
+Creating decoders for process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+     1/10: $0\ovf_q[0:0]
+     2/10: $0\pend_q[0:0]
+     3/10: $0\pcnt_q[7:0]
+     4/10: $0\count_q[15:0]
+     5/10: $0\active_q[15:0]
+     6/10: $0\shadow_q[15:0]
+     7/10: $0\psc_q[7:0]
+     8/10: $0\ie_q[0:0]
+     9/10: $0\mode_q[0:0]
+    10/10: $0\en_q[0:0]
+Creating decoders for process `\rtl_claude_2.$proc$rtl_claude_2.sv:54$133'.
+     1/2: $2\PRDATA[31:0]
+     2/2: $1\PRDATA[31:0]
+Creating decoders for process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+     1/10: $0\ovf_q[0:0]
+     2/10: $0\pend_q[0:0]
+     3/10: $0\pcnt_q[7:0]
+     4/10: $0\count_q[15:0]
+     5/10: $0\active_q[15:0]
+     6/10: $0\shadow_q[15:0]
+     7/10: $0\psc_q[7:0]
+     8/10: $0\ie_q[0:0]
+     9/10: $0\mode_q[0:0]
+    10/10: $0\en_q[0:0]
+Creating decoders for process `\rtl_claude_1.$proc$rtl_claude_1.sv:68$91'.
+     1/2: $2\PRDATA[31:0]
+     2/2: $1\PRDATA[31:0]
+Creating decoders for process `\rtl_claude_1.$proc$rtl_claude_1.sv:37$63'.
+     1/2: $1\mapped[0:0]
+     2/2: $1\ro_reg[0:0]
+Creating decoders for process `\ref_m.$proc$ref_m.sv:119$60'.
+     1/10: $0\ovf[0:0]
+     2/10: $0\pend[0:0]
+     3/10: $0\pcnt[7:0]
+     4/10: $0\count[15:0]
+     5/10: $0\active[15:0]
+     6/10: $0\shadow[15:0]
+     7/10: $0\psc[7:0]
+     8/10: $0\ie[0:0]
+     9/10: $0\mode[0:0]
+    10/10: $0\en[0:0]
+Creating decoders for process `\ref_m.$proc$ref_m.sv:84$42'.
+     1/13: $5\count_n[15:0]
+     2/13: $4\count_n[15:0]
+     3/13: $4\active_n[15:0]
+     4/13: $3\count_n[15:0]
+     5/13: $3\active_n[15:0]
+     6/13: $2\count_n[15:0]
+     7/13: $2\active_n[15:0]
+     8/13: $2\pcnt_n[7:0]
+     9/13: $1\pcnt_n[7:0]
+    10/13: $1\count_n[15:0]
+    11/13: $1\active_n[15:0]
+    12/13: $2\en_n[0:0]
+    13/13: $1\en_n[0:0]
+Creating decoders for process `\ref_m.$proc$ref_m.sv:63$39'.
+     1/2: $2\PRDATA[31:0]
+     2/2: $1\PRDATA[31:0]
+
+7.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\rtl_gpt_2.\PRDATA' from process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:56$252'.
+No latch inferred for signal `\rtl_gpt_1.\PRDATA' from process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:57$200'.
+No latch inferred for signal `\rtl_claude_2.\PRDATA' from process `\rtl_claude_2.$proc$rtl_claude_2.sv:54$133'.
+No latch inferred for signal `\rtl_claude_1.\PRDATA' from process `\rtl_claude_1.$proc$rtl_claude_1.sv:68$91'.
+No latch inferred for signal `\rtl_claude_1.\mapped' from process `\rtl_claude_1.$proc$rtl_claude_1.sv:37$63'.
+No latch inferred for signal `\rtl_claude_1.\ro_reg' from process `\rtl_claude_1.$proc$rtl_claude_1.sv:37$63'.
+No latch inferred for signal `\ref_m.\en_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\mode_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\ie_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\pend_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\ovf_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\psc_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\pcnt_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\shadow_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\active_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\count_n' from process `\ref_m.$proc$ref_m.sv:84$42'.
+No latch inferred for signal `\ref_m.\PRDATA' from process `\ref_m.$proc$ref_m.sv:63$39'.
+
+7.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\rtl_gpt_2.\en' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$693' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\mode' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$698' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\ie' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$703' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\pend' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$708' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\ovf' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$713' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\psc' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$718' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\pcnt' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$723' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\shadow' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$728' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\active' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$733' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_2.\count' using process `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+  created $adff cell `$procdff$738' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\en' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$743' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\mode' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$748' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\ie' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$753' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\pend' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$758' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\ovf' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$763' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\psc' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$768' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\pcnt' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$773' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\shadow' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$778' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\active' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$783' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_gpt_1.\count' using process `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+  created $adff cell `$procdff$788' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\en_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$793' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\mode_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$798' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\ie_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$803' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\psc_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$808' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\shadow_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$813' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\active_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$818' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\count_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$823' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\pcnt_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$828' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\pend_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$833' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_2.\ovf_q' using process `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+  created $adff cell `$procdff$838' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\en_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$843' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\mode_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$848' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\ie_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$853' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\psc_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$858' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\shadow_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$863' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\active_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$868' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\count_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$873' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\pcnt_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$878' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\pend_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$883' with positive edge clock and positive level reset.
+Creating register for signal `\rtl_claude_1.\ovf_q' using process `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+  created $adff cell `$procdff$888' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\en' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$893' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\mode' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$898' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\ie' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$903' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\pend' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$908' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\ovf' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$913' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\psc' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$918' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\pcnt' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$923' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\shadow' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$928' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\active' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$933' with positive edge clock and positive level reset.
+Creating register for signal `\ref_m.\count' using process `\ref_m.$proc$ref_m.sv:119$60'.
+  created $adff cell `$procdff$938' with positive edge clock and positive level reset.
+
+7.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+7.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `top.$proc$top.sv:12$267'.
+Found and cleaned up 13 empty switches in `\rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+Removing empty process `rtl_gpt_2.$proc$rtl_gpt_2.sv:74$257'.
+Found and cleaned up 2 empty switches in `\rtl_gpt_2.$proc$rtl_gpt_2.sv:56$252'.
+Removing empty process `rtl_gpt_2.$proc$rtl_gpt_2.sv:56$252'.
+Found and cleaned up 13 empty switches in `\rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+Removing empty process `rtl_gpt_1.$proc$rtl_gpt_1.sv:73$203'.
+Found and cleaned up 2 empty switches in `\rtl_gpt_1.$proc$rtl_gpt_1.sv:57$200'.
+Removing empty process `rtl_gpt_1.$proc$rtl_gpt_1.sv:57$200'.
+Found and cleaned up 13 empty switches in `\rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+Removing empty process `rtl_claude_2.$proc$rtl_claude_2.sv:84$150'.
+Found and cleaned up 2 empty switches in `\rtl_claude_2.$proc$rtl_claude_2.sv:54$133'.
+Removing empty process `rtl_claude_2.$proc$rtl_claude_2.sv:54$133'.
+Found and cleaned up 13 empty switches in `\rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+Removing empty process `rtl_claude_1.$proc$rtl_claude_1.sv:84$92'.
+Found and cleaned up 2 empty switches in `\rtl_claude_1.$proc$rtl_claude_1.sv:68$91'.
+Removing empty process `rtl_claude_1.$proc$rtl_claude_1.sv:68$91'.
+Found and cleaned up 1 empty switch in `\rtl_claude_1.$proc$rtl_claude_1.sv:37$63'.
+Removing empty process `rtl_claude_1.$proc$rtl_claude_1.sv:37$63'.
+Removing empty process `ref_m.$proc$ref_m.sv:119$60'.
+Found and cleaned up 7 empty switches in `\ref_m.$proc$ref_m.sv:84$42'.
+Removing empty process `ref_m.$proc$ref_m.sv:84$42'.
+Found and cleaned up 2 empty switches in `\ref_m.$proc$ref_m.sv:63$39'.
+Removing empty process `ref_m.$proc$ref_m.sv:63$39'.
+Cleaned up 70 empty switches.
+
+7.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module rtl_gpt_2.
+<suppressed ~25 debug messages>
+Optimizing module rtl_gpt_1.
+<suppressed ~25 debug messages>
+Optimizing module rtl_claude_2.
+<suppressed ~26 debug messages>
+Optimizing module rtl_claude_1.
+<suppressed ~26 debug messages>
+Optimizing module ref_m.
+<suppressed ~25 debug messages>
+
+7.3. Executing FUTURE pass.
+
+7.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module rtl_gpt_2.
+Optimizing module rtl_gpt_1.
+Optimizing module rtl_claude_2.
+Optimizing module rtl_claude_1.
+Optimizing module ref_m.
+
+7.5. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Checking module rtl_gpt_2...
+Checking module rtl_gpt_1...
+Checking module rtl_claude_2...
+Checking module rtl_claude_1...
+Checking module ref_m...
+Found and reported 0 problems.
+
+7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Finding unused cells or wires in module \rtl_gpt_2..
+Finding unused cells or wires in module \rtl_gpt_1..
+Finding unused cells or wires in module \rtl_claude_2..
+Finding unused cells or wires in module \rtl_claude_1..
+Finding unused cells or wires in module \ref_m..
+Removed 60 unused cells and 417 unused wires.
+<suppressed ~65 debug messages>
+
+7.7. Executing OPT pass (performing simple optimizations).
+
+7.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module rtl_gpt_2.
+Optimizing module rtl_gpt_1.
+Optimizing module rtl_claude_2.
+Optimizing module rtl_claude_1.
+Optimizing module ref_m.
+
+7.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 45 cells of `\top'.
+Finding duplicate cells in `\top'.
+Finding identical cells in module `\rtl_gpt_2'.
+Computing hashes of 92 cells of `\rtl_gpt_2'.
+Finding duplicate cells in `\rtl_gpt_2'.
+Computing hashes of 80 cells of `\rtl_gpt_2'.
+Finding duplicate cells in `\rtl_gpt_2'.
+Computing hashes of 77 cells of `\rtl_gpt_2'.
+Finding duplicate cells in `\rtl_gpt_2'.
+<suppressed ~45 debug messages>
+Finding identical cells in module `\rtl_gpt_1'.
+Computing hashes of 91 cells of `\rtl_gpt_1'.
+Finding duplicate cells in `\rtl_gpt_1'.
+Computing hashes of 79 cells of `\rtl_gpt_1'.
+Finding duplicate cells in `\rtl_gpt_1'.
+Computing hashes of 76 cells of `\rtl_gpt_1'.
+Finding duplicate cells in `\rtl_gpt_1'.
+<suppressed ~45 debug messages>
+Finding identical cells in module `\rtl_claude_2'.
+Computing hashes of 95 cells of `\rtl_claude_2'.
+Finding duplicate cells in `\rtl_claude_2'.
+Computing hashes of 82 cells of `\rtl_claude_2'.
+Finding duplicate cells in `\rtl_claude_2'.
+<suppressed ~39 debug messages>
+Finding identical cells in module `\rtl_claude_1'.
+Computing hashes of 90 cells of `\rtl_claude_1'.
+Finding duplicate cells in `\rtl_claude_1'.
+Computing hashes of 77 cells of `\rtl_claude_1'.
+Finding duplicate cells in `\rtl_claude_1'.
+Computing hashes of 76 cells of `\rtl_claude_1'.
+Finding duplicate cells in `\rtl_claude_1'.
+<suppressed ~42 debug messages>
+Finding identical cells in module `\ref_m'.
+Computing hashes of 105 cells of `\ref_m'.
+Finding duplicate cells in `\ref_m'.
+Computing hashes of 96 cells of `\ref_m'.
+Finding duplicate cells in `\ref_m'.
+Computing hashes of 93 cells of `\ref_m'.
+Finding duplicate cells in `\ref_m'.
+<suppressed ~36 debug messages>
+Removed a total of 69 cells.
+
+7.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rtl_gpt_2..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$366.
+Running muxtree optimizer on module \rtl_gpt_1..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$437.
+Running muxtree optimizer on module \rtl_claude_2..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$506.
+Running muxtree optimizer on module \rtl_claude_1..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$573.
+Running muxtree optimizer on module \ref_m..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$670.
+    dead port 1/2 on $mux $procmux$655.
+    dead port 1/2 on $mux $procmux$649.
+    dead port 1/2 on $mux $procmux$643.
+    dead port 1/2 on $mux $procmux$637.
+    dead port 2/2 on $mux $procmux$634.
+    dead port 1/2 on $mux $procmux$628.
+    dead port 2/2 on $mux $procmux$625.
+    dead port 1/2 on $mux $procmux$619.
+    dead port 2/2 on $mux $procmux$616.
+    dead port 2/2 on $mux $procmux$614.
+    dead port 1/2 on $mux $procmux$607.
+    dead port 2/2 on $mux $procmux$604.
+    dead port 2/2 on $mux $procmux$602.
+    dead port 1/2 on $mux $procmux$595.
+    dead port 2/2 on $mux $procmux$592.
+    dead port 1/2 on $mux $procmux$590.
+    dead port 2/2 on $mux $procmux$684.
+Removed 22 multiplexer ports.
+<suppressed ~202 debug messages>
+
+7.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+  Optimizing cells in module \rtl_gpt_2.
+  Optimizing cells in module \rtl_gpt_1.
+  Optimizing cells in module \rtl_claude_2.
+  Optimizing cells in module \rtl_claude_1.
+    New ctrl vector for $pmux cell $procmux$579: $auto$opt_reduce.cc:137:opt_pmux$940
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:131:opt_pmux$939: { $procmux$584_CMP $procmux$581_CMP }
+  Optimizing cells in module \rtl_claude_1.
+  Optimizing cells in module \ref_m.
+Performed a total of 2 changes.
+
+7.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 45 cells of `\top'.
+Finding duplicate cells in `\top'.
+Finding identical cells in module `\rtl_gpt_2'.
+Computing hashes of 76 cells of `\rtl_gpt_2'.
+Finding duplicate cells in `\rtl_gpt_2'.
+Finding identical cells in module `\rtl_gpt_1'.
+Computing hashes of 75 cells of `\rtl_gpt_1'.
+Finding duplicate cells in `\rtl_gpt_1'.
+Finding identical cells in module `\rtl_claude_2'.
+Computing hashes of 81 cells of `\rtl_claude_2'.
+Finding duplicate cells in `\rtl_claude_2'.
+Finding identical cells in module `\rtl_claude_1'.
+Computing hashes of 76 cells of `\rtl_claude_1'.
+Finding duplicate cells in `\rtl_claude_1'.
+Finding identical cells in module `\ref_m'.
+Computing hashes of 75 cells of `\ref_m'.
+Finding duplicate cells in `\ref_m'.
+Removed a total of 0 cells.
+
+7.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Finding unused cells or wires in module \rtl_gpt_2..
+Finding unused cells or wires in module \rtl_gpt_1..
+Finding unused cells or wires in module \rtl_claude_2..
+Finding unused cells or wires in module \rtl_claude_1..
+Finding unused cells or wires in module \ref_m..
+Removed 1 unused cells and 85 unused wires.
+<suppressed ~6 debug messages>
+
+7.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module rtl_gpt_2.
+Optimizing module rtl_gpt_1.
+Optimizing module rtl_claude_2.
+Optimizing module rtl_claude_1.
+Optimizing module ref_m.
+
+7.7.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.7.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rtl_gpt_2..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \rtl_gpt_1..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \rtl_claude_2..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \rtl_claude_1..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ref_m..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~180 debug messages>
+
+7.7.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+  Optimizing cells in module \rtl_gpt_2.
+  Optimizing cells in module \rtl_gpt_1.
+  Optimizing cells in module \rtl_claude_2.
+  Optimizing cells in module \rtl_claude_1.
+  Optimizing cells in module \ref_m.
+Performed a total of 0 changes.
+
+7.7.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 45 cells of `\top'.
+Finding duplicate cells in `\top'.
+Finding identical cells in module `\rtl_gpt_2'.
+Computing hashes of 76 cells of `\rtl_gpt_2'.
+Finding duplicate cells in `\rtl_gpt_2'.
+Finding identical cells in module `\rtl_gpt_1'.
+Computing hashes of 75 cells of `\rtl_gpt_1'.
+Finding duplicate cells in `\rtl_gpt_1'.
+Finding identical cells in module `\rtl_claude_2'.
+Computing hashes of 81 cells of `\rtl_claude_2'.
+Finding duplicate cells in `\rtl_claude_2'.
+Finding identical cells in module `\rtl_claude_1'.
+Computing hashes of 75 cells of `\rtl_claude_1'.
+Finding duplicate cells in `\rtl_claude_1'.
+Finding identical cells in module `\ref_m'.
+Computing hashes of 75 cells of `\ref_m'.
+Finding duplicate cells in `\ref_m'.
+Removed a total of 0 cells.
+
+7.7.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Finding unused cells or wires in module \rtl_gpt_2..
+Finding unused cells or wires in module \rtl_gpt_1..
+Finding unused cells or wires in module \rtl_claude_2..
+Finding unused cells or wires in module \rtl_claude_1..
+Finding unused cells or wires in module \ref_m..
+
+7.7.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module rtl_gpt_2.
+Optimizing module rtl_gpt_1.
+Optimizing module rtl_claude_2.
+Optimizing module rtl_claude_1.
+Optimizing module ref_m.
+
+7.7.14. Finished fast OPT passes. (There is nothing left to do.)
+
+7.8. Executing WREDUCE pass (reducing word size of cells).
+Removed top 3 bits (of 6) from port B of cell rtl_gpt_2.$le$rtl_gpt_2.sv:39$214 ($le).
+Removed top 3 bits (of 6) from port B of cell rtl_gpt_2.$eq$rtl_gpt_2.sv:49$242 ($eq).
+Removed top 15 bits (of 16) from port B of cell rtl_gpt_2.$sub$rtl_gpt_2.sv:113$262 ($sub).
+Removed top 7 bits (of 8) from port B of cell rtl_gpt_2.$add$rtl_gpt_2.sv:116$263 ($add).
+Removed top 3 bits (of 6) from port B of cell rtl_gpt_2.$procmux$360_CMP0 ($eq).
+Removed top 16 bits (of 32) from mux cell rtl_gpt_2.$procmux$359 ($pmux).
+Removed top 3 bits (of 6) from port B of cell rtl_gpt_2.$procmux$361_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell rtl_gpt_2.$procmux$362_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell rtl_gpt_2.$procmux$363_CMP0 ($eq).
+Removed top 5 bits (of 6) from port B of cell rtl_gpt_2.$procmux$364_CMP0 ($eq).
+Removed top 16 bits (of 32) from mux cell rtl_gpt_2.$procmux$369 ($mux).
+Removed top 16 bits (of 32) from wire rtl_gpt_2.$2\PRDATA[31:0].
+Removed top 3 bits (of 6) from port B of cell rtl_gpt_1.$le$rtl_gpt_1.sv:39$161 ($le).
+Removed top 3 bits (of 6) from port B of cell rtl_gpt_1.$eq$rtl_gpt_1.sv:49$189 ($eq).
+Removed top 15 bits (of 16) from port B of cell rtl_gpt_1.$sub$rtl_gpt_1.sv:112$208 ($sub).
+Removed top 7 bits (of 8) from port B of cell rtl_gpt_1.$add$rtl_gpt_1.sv:115$209 ($add).
+Removed top 3 bits (of 6) from port B of cell rtl_gpt_1.$procmux$431_CMP0 ($eq).
+Removed top 16 bits (of 32) from mux cell rtl_gpt_1.$procmux$430 ($pmux).
+Removed top 3 bits (of 6) from port B of cell rtl_gpt_1.$procmux$432_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell rtl_gpt_1.$procmux$433_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell rtl_gpt_1.$procmux$434_CMP0 ($eq).
+Removed top 5 bits (of 6) from port B of cell rtl_gpt_1.$procmux$435_CMP0 ($eq).
+Removed top 16 bits (of 32) from mux cell rtl_gpt_1.$procmux$440 ($mux).
+Removed top 16 bits (of 32) from wire rtl_gpt_1.$2\PRDATA[31:0].
+Removed top 3 bits (of 6) from port B of cell rtl_claude_2.$eq$rtl_claude_2.sv:77$140 ($eq).
+Removed top 15 bits (of 16) from port B of cell rtl_claude_2.$sub$rtl_claude_2.sv:128$155 ($sub).
+Removed top 7 bits (of 8) from port B of cell rtl_claude_2.$add$rtl_claude_2.sv:130$156 ($add).
+Removed top 3 bits (of 6) from port B of cell rtl_claude_2.$procmux$500_CMP0 ($eq).
+Removed top 16 bits (of 32) from mux cell rtl_claude_2.$procmux$499 ($pmux).
+Removed top 3 bits (of 6) from port B of cell rtl_claude_2.$procmux$501_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell rtl_claude_2.$procmux$502_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell rtl_claude_2.$procmux$503_CMP0 ($eq).
+Removed top 5 bits (of 6) from port B of cell rtl_claude_2.$procmux$504_CMP0 ($eq).
+Removed top 16 bits (of 32) from mux cell rtl_claude_2.$procmux$509 ($mux).
+Removed top 16 bits (of 32) from wire rtl_claude_2.$2\PRDATA[31:0].
+Removed top 15 bits (of 16) from port B of cell rtl_claude_1.$sub$rtl_claude_1.sv:128$97 ($sub).
+Removed top 7 bits (of 8) from port B of cell rtl_claude_1.$add$rtl_claude_1.sv:131$98 ($add).
+Removed top 16 bits (of 32) from mux cell rtl_claude_1.$procmux$566 ($pmux).
+Removed top 16 bits (of 32) from mux cell rtl_claude_1.$procmux$576 ($mux).
+Removed top 5 bits (of 6) from port B of cell rtl_claude_1.$procmux$581_CMP1 ($eq).
+Removed top 4 bits (of 6) from port B of cell rtl_claude_1.$procmux$581_CMP2 ($eq).
+Removed top 3 bits (of 6) from port B of cell rtl_claude_1.$procmux$581_CMP3 ($eq).
+Removed top 4 bits (of 6) from port B of cell rtl_claude_1.$procmux$584_CMP0 ($eq).
+Removed top 3 bits (of 6) from port B of cell rtl_claude_1.$procmux$584_CMP1 ($eq).
+Removed top 3 bits (of 6) from port B of cell rtl_claude_1.$procmux$584_CMP2 ($eq).
+Removed top 16 bits (of 32) from wire rtl_claude_1.$2\PRDATA[31:0].
+Removed top 3 bits (of 6) from port B of cell ref_m.$gt$ref_m.sv:42$5 ($gt).
+Removed top 3 bits (of 6) from port B of cell ref_m.$eq$ref_m.sv:50$28 ($eq).
+Removed top 7 bits (of 8) from port B of cell ref_m.$add$ref_m.sv:104$49 ($add).
+Removed top 15 bits (of 16) from port B of cell ref_m.$sub$ref_m.sv:109$52 ($sub).
+Removed top 3 bits (of 6) from port B of cell ref_m.$procmux$678_CMP0 ($eq).
+Removed top 16 bits (of 32) from mux cell ref_m.$procmux$677 ($pmux).
+Removed top 3 bits (of 6) from port B of cell ref_m.$procmux$679_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell ref_m.$procmux$680_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell ref_m.$procmux$681_CMP0 ($eq).
+Removed top 5 bits (of 6) from port B of cell ref_m.$procmux$682_CMP0 ($eq).
+Removed top 16 bits (of 32) from mux cell ref_m.$procmux$687 ($mux).
+Removed top 16 bits (of 32) from wire ref_m.$2\PRDATA[31:0].
+
+7.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Finding unused cells or wires in module \rtl_gpt_2..
+Finding unused cells or wires in module \rtl_gpt_1..
+Finding unused cells or wires in module \rtl_claude_2..
+Finding unused cells or wires in module \rtl_claude_1..
+Finding unused cells or wires in module \ref_m..
+Removed 0 unused cells and 5 unused wires.
+<suppressed ~5 debug messages>
+
+7.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+7.11. Executing OPT pass (performing simple optimizations).
+
+7.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module rtl_gpt_2.
+Optimizing module rtl_gpt_1.
+Optimizing module rtl_claude_2.
+Optimizing module rtl_claude_1.
+Optimizing module ref_m.
+
+7.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 45 cells of `\top'.
+Finding duplicate cells in `\top'.
+Finding identical cells in module `\rtl_gpt_2'.
+Computing hashes of 76 cells of `\rtl_gpt_2'.
+Finding duplicate cells in `\rtl_gpt_2'.
+Finding identical cells in module `\rtl_gpt_1'.
+Computing hashes of 75 cells of `\rtl_gpt_1'.
+Finding duplicate cells in `\rtl_gpt_1'.
+Finding identical cells in module `\rtl_claude_2'.
+Computing hashes of 81 cells of `\rtl_claude_2'.
+Finding duplicate cells in `\rtl_claude_2'.
+Finding identical cells in module `\rtl_claude_1'.
+Computing hashes of 75 cells of `\rtl_claude_1'.
+Finding duplicate cells in `\rtl_claude_1'.
+Finding identical cells in module `\ref_m'.
+Computing hashes of 75 cells of `\ref_m'.
+Finding duplicate cells in `\ref_m'.
+Removed a total of 0 cells.
+
+7.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Finding unused cells or wires in module \rtl_gpt_2..
+Finding unused cells or wires in module \rtl_gpt_1..
+Finding unused cells or wires in module \rtl_claude_2..
+Finding unused cells or wires in module \rtl_claude_1..
+Finding unused cells or wires in module \ref_m..
+
+7.11.4. Finished fast OPT passes.
+
+7.12. Executing SORT pass.
+
+7.13. Printing statistics.
+
+=== ref_m ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       86 wires
+      502 wire bits
+       47 public wires
+      307 public wire bits
+       12 ports
+      149 port bits
+       75 cells
+        1   $add
+       10   $adff
+       21   $and
+        6   $eq
+        1   $ge
+        1   $gt
+        2   $logic_not
+       23   $mux
+        4   $not
+        4   $or
+        1   $pmux
+        1   $sub
+
+=== rtl_claude_1 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       86 wires
+      479 wire bits
+       37 public wires
+      238 public wire bits
+       12 ports
+      149 port bits
+       75 cells
+        1   $add
+       10   $adff
+       21   $and
+        6   $eq
+        1   $ge
+        2   $logic_not
+       24   $mux
+        4   $not
+        2   $or
+        1   $pmux
+        2   $reduce_or
+        1   $sub
+
+=== rtl_claude_2 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       92 wires
+      500 wire bits
+       37 public wires
+      238 public wire bits
+       12 ports
+      149 port bits
+       81 cells
+        1   $add
+       10   $adff
+       21   $and
+        6   $eq
+        1   $ge
+        1   $logic_and
+        2   $logic_not
+        9   $logic_or
+       23   $mux
+        4   $not
+        1   $or
+        1   $pmux
+        1   $sub
+
+=== rtl_gpt_1 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       84 wires
+      510 wire bits
+       33 public wires
+      229 public wire bits
+       12 ports
+      149 port bits
+       75 cells
+        1   $add
+       10   $adff
+        6   $eq
+        1   $ge
+        1   $le
+       20   $logic_and
+        6   $logic_not
+        4   $logic_or
+       24   $mux
+        1   $pmux
+        1   $sub
+
+=== rtl_gpt_2 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       85 wires
+      511 wire bits
+       33 public wires
+      229 public wire bits
+       12 ports
+      149 port bits
+       76 cells
+        1   $add
+       10   $adff
+        6   $eq
+        1   $ge
+        1   $le
+       21   $logic_and
+        6   $logic_not
+        4   $logic_or
+       24   $mux
+        1   $pmux
+        1   $sub
+
+=== top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       72 wires
+      605 wire bits
+       40 public wires
+      573 public wire bits
+        7 ports
+       45 port bits
+       40 cells
+        8   $check
+       20   $eq
+       12   $logic_and
+        5 submodules
+        1   ref_m
+        1   rtl_claude_1
+        1   rtl_claude_2
+        1   rtl_gpt_1
+        1   rtl_gpt_2
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      422 top
+       75 ref_m
+       75 rtl_claude_1
+       81 rtl_claude_2
+       75 rtl_gpt_1
+       76 rtl_gpt_2
+
+        +----------Count including submodules.
+        | 
+      505 wires
+     3107 wire bits
+      227 public wires
+     1814 public wire bits
+       67 ports
+      790 port bits
+        - memories
+        - memory bits
+        - processes
+      422 cells
+        5   $add
+       50   $adff
+       63   $and
+        8   $check
+       50   $eq
+        5   $ge
+        1   $gt
+        2   $le
+       54   $logic_and
+       18   $logic_not
+       17   $logic_or
+      118   $mux
+       12   $not
+        7   $or
+        5   $pmux
+        2   $reduce_or
+        5   $sub
+        5 submodules
+        1   ref_m
+        1   rtl_claude_1
+        1   rtl_claude_2
+        1   rtl_gpt_1
+        1   rtl_gpt_2
+
+7.14. Executing CHECK pass (checking for obvious problems).
+Checking module ref_m...
+Checking module rtl_claude_1...
+Checking module rtl_claude_2...
+Checking module rtl_gpt_1...
+Checking module rtl_gpt_2...
+Checking module top...
+Found and reported 0 problems.
+
+8. Executing FLATTEN pass (flatten design).
+Deleting now unused module ref_m.
+Deleting now unused module rtl_claude_1.
+Deleting now unused module rtl_claude_2.
+Deleting now unused module rtl_gpt_1.
+Deleting now unused module rtl_gpt_2.
+<suppressed ~5 debug messages>
+
+9. Executing ASYNC2SYNC pass.
+Replacing top.$flatten\u0.$procdff$938 ($adff): ARST=\u0.PRESETn, D=\u0.count_n, Q=\u0.count
+Replacing top.$flatten\u0.$procdff$933 ($adff): ARST=\u0.PRESETn, D=\u0.active_n, Q=\u0.active
+Replacing top.$flatten\u0.$procdff$928 ($adff): ARST=\u0.PRESETn, D=\u0.shadow_n, Q=\u0.shadow
+Replacing top.$flatten\u0.$procdff$923 ($adff): ARST=\u0.PRESETn, D=\u0.pcnt_n, Q=\u0.pcnt
+Replacing top.$flatten\u0.$procdff$918 ($adff): ARST=\u0.PRESETn, D=\u0.psc_n, Q=\u0.psc
+Replacing top.$flatten\u0.$procdff$913 ($adff): ARST=\u0.PRESETn, D=\u0.ovf_n, Q=\u0.ovf
+Replacing top.$flatten\u0.$procdff$908 ($adff): ARST=\u0.PRESETn, D=\u0.pend_n, Q=\u0.pend
+Replacing top.$flatten\u0.$procdff$903 ($adff): ARST=\u0.PRESETn, D=\u0.ie_n, Q=\u0.ie
+Replacing top.$flatten\u0.$procdff$898 ($adff): ARST=\u0.PRESETn, D=\u0.mode_n, Q=\u0.mode
+Replacing top.$flatten\u0.$procdff$893 ($adff): ARST=\u0.PRESETn, D=\u0.en_n, Q=\u0.en
+Replacing top.$flatten\u1.$procdff$888 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\ovf_q[0:0], Q=\u1.ovf_q
+Replacing top.$flatten\u1.$procdff$883 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\pend_q[0:0], Q=\u1.pend_q
+Replacing top.$flatten\u1.$procdff$878 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\pcnt_q[7:0], Q=\u1.pcnt_q
+Replacing top.$flatten\u1.$procdff$873 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\count_q[15:0], Q=\u1.count_q
+Replacing top.$flatten\u1.$procdff$868 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\active_q[15:0], Q=\u1.active_q
+Replacing top.$flatten\u1.$procdff$863 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\shadow_q[15:0], Q=\u1.shadow_q
+Replacing top.$flatten\u1.$procdff$858 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\psc_q[7:0], Q=\u1.psc_q
+Replacing top.$flatten\u1.$procdff$853 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\ie_q[0:0], Q=\u1.ie_q
+Replacing top.$flatten\u1.$procdff$848 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\mode_q[0:0], Q=\u1.mode_q
+Replacing top.$flatten\u1.$procdff$843 ($adff): ARST=\u1.PRESETn, D=$flatten\u1.$0\en_q[0:0], Q=\u1.en_q
+Replacing top.$flatten\u2.$procdff$838 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\ovf_q[0:0], Q=\u2.ovf_q
+Replacing top.$flatten\u2.$procdff$833 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\pend_q[0:0], Q=\u2.pend_q
+Replacing top.$flatten\u2.$procdff$828 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\pcnt_q[7:0], Q=\u2.pcnt_q
+Replacing top.$flatten\u2.$procdff$823 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\count_q[15:0], Q=\u2.count_q
+Replacing top.$flatten\u2.$procdff$818 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\active_q[15:0], Q=\u2.active_q
+Replacing top.$flatten\u2.$procdff$813 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\shadow_q[15:0], Q=\u2.shadow_q
+Replacing top.$flatten\u2.$procdff$808 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\psc_q[7:0], Q=\u2.psc_q
+Replacing top.$flatten\u2.$procdff$803 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\ie_q[0:0], Q=\u2.ie_q
+Replacing top.$flatten\u2.$procdff$798 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\mode_q[0:0], Q=\u2.mode_q
+Replacing top.$flatten\u2.$procdff$793 ($adff): ARST=\u2.PRESETn, D=$flatten\u2.$0\en_q[0:0], Q=\u2.en_q
+Replacing top.$flatten\u3.$procdff$788 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\count[15:0], Q=\u3.count
+Replacing top.$flatten\u3.$procdff$783 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\active[15:0], Q=\u3.active
+Replacing top.$flatten\u3.$procdff$778 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\shadow[15:0], Q=\u3.shadow
+Replacing top.$flatten\u3.$procdff$773 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\pcnt[7:0], Q=\u3.pcnt
+Replacing top.$flatten\u3.$procdff$768 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\psc[7:0], Q=\u3.psc
+Replacing top.$flatten\u3.$procdff$763 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\ovf[0:0], Q=\u3.ovf
+Replacing top.$flatten\u3.$procdff$758 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\pend[0:0], Q=\u3.pend
+Replacing top.$flatten\u3.$procdff$753 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\ie[0:0], Q=\u3.ie
+Replacing top.$flatten\u3.$procdff$748 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\mode[0:0], Q=\u3.mode
+Replacing top.$flatten\u3.$procdff$743 ($adff): ARST=\u3.PRESETn, D=$flatten\u3.$0\en[0:0], Q=\u3.en
+Replacing top.$flatten\u4.$procdff$738 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\count[15:0], Q=\u4.count
+Replacing top.$flatten\u4.$procdff$733 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\active[15:0], Q=\u4.active
+Replacing top.$flatten\u4.$procdff$728 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\shadow[15:0], Q=\u4.shadow
+Replacing top.$flatten\u4.$procdff$723 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\pcnt[7:0], Q=\u4.pcnt
+Replacing top.$flatten\u4.$procdff$718 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\psc[7:0], Q=\u4.psc
+Replacing top.$flatten\u4.$procdff$713 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\ovf[0:0], Q=\u4.ovf
+Replacing top.$flatten\u4.$procdff$708 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\pend[0:0], Q=\u4.pend
+Replacing top.$flatten\u4.$procdff$703 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\ie[0:0], Q=\u4.ie
+Replacing top.$flatten\u4.$procdff$698 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\mode[0:0], Q=\u4.mode
+Replacing top.$flatten\u4.$procdff$693 ($adff): ARST=\u4.PRESETn, D=$flatten\u4.$0\en[0:0], Q=\u4.en
+
+10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Removed 16 unused cells and 16 unused wires.
+<suppressed ~17 debug messages>
+
+11. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 477 cells to SAT database.
+Final init constraint equation: { $auto$async2sync.cc:253:execute$951 $auto$async2sync.cc:253:execute$953 $auto$async2sync.cc:253:execute$955 $auto$async2sync.cc:253:execute$957 $auto$async2sync.cc:253:execute$959 $auto$async2sync.cc:253:execute$961 $auto$async2sync.cc:253:execute$963 $auto$async2sync.cc:253:execute$965 $auto$async2sync.cc:253:execute$967 $auto$async2sync.cc:253:execute$969 $auto$async2sync.cc:253:execute$971 $auto$async2sync.cc:253:execute$973 $auto$async2sync.cc:253:execute$975 $auto$async2sync.cc:253:execute$977 $auto$async2sync.cc:253:execute$979 $auto$async2sync.cc:253:execute$981 $auto$async2sync.cc:253:execute$983 $auto$async2sync.cc:253:execute$985 $auto$async2sync.cc:253:execute$987 $auto$async2sync.cc:253:execute$989 $auto$async2sync.cc:253:execute$991 $auto$async2sync.cc:253:execute$993 $auto$async2sync.cc:253:execute$995 $auto$async2sync.cc:253:execute$997 $auto$async2sync.cc:253:execute$999 $auto$async2sync.cc:253:execute$1001 $auto$async2sync.cc:253:execute$1003 $auto$async2sync.cc:253:execute$1005 $auto$async2sync.cc:253:execute$1007 $auto$async2sync.cc:253:execute$1009 $auto$async2sync.cc:253:execute$1011 $auto$async2sync.cc:253:execute$1013 $auto$async2sync.cc:253:execute$1015 $auto$async2sync.cc:253:execute$1017 $auto$async2sync.cc:253:execute$1019 $auto$async2sync.cc:253:execute$1021 $auto$async2sync.cc:253:execute$1023 $auto$async2sync.cc:253:execute$1025 $auto$async2sync.cc:253:execute$1027 $auto$async2sync.cc:253:execute$1029 $auto$async2sync.cc:253:execute$1031 $auto$async2sync.cc:253:execute$1033 $auto$async2sync.cc:253:execute$1035 $auto$async2sync.cc:253:execute$1037 $auto$async2sync.cc:253:execute$1039 $auto$async2sync.cc:253:execute$1041 $auto$async2sync.cc:253:execute$1043 $auto$async2sync.cc:253:execute$1045 $auto$async2sync.cc:253:execute$1047 $auto$async2sync.cc:253:execute$1049 } = 345'000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 477 cells to SAT database.
+Import proof for assert: $logic_and$top.sv:13$274_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:15$282_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:17$290_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:19$298_Y when 1'1.
+Import proof for assert: $eq$top.sv:14$275_Y when 1'1.
+Import proof for assert: $eq$top.sv:16$283_Y when 1'1.
+Import proof for assert: $eq$top.sv:18$291_Y when 1'1.
+Import proof for assert: $eq$top.sv:20$299_Y when 1'1.
+
+** Trying induction with length 1 **
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 477 cells to SAT database.
+Import proof for assert: $logic_and$top.sv:13$274_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:15$282_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:17$290_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:19$298_Y when 1'1.
+Import proof for assert: $eq$top.sv:14$275_Y when 1'1.
+Import proof for assert: $eq$top.sv:16$283_Y when 1'1.
+Import proof for assert: $eq$top.sv:18$291_Y when 1'1.
+Import proof for assert: $eq$top.sv:20$299_Y when 1'1.
+
+[base case 1] Solving problem with 31705 variables and 87001 clauses..
+Base case for induction length 1 proven.
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 477 cells to SAT database.
+Import proof for assert: $logic_and$top.sv:13$274_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:15$282_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:17$290_Y when 1'1.
+Import proof for assert: $logic_and$top.sv:19$298_Y when 1'1.
+Import proof for assert: $eq$top.sv:14$275_Y when 1'1.
+Import proof for assert: $eq$top.sv:16$283_Y when 1'1.
+Import proof for assert: $eq$top.sv:18$291_Y when 1'1.
+Import proof for assert: $eq$top.sv:20$299_Y when 1'1.
+
+[induction step 1] Solving problem with 31015 variables and 84594 clauses..
+Induction step proven: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: c145470ea6, time: 1.02s, user: 1.12s, system: 0.00s
+Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+Time spent: 80% 1x sat (0 sec), 4% 7x read_verilog (0 sec), ...

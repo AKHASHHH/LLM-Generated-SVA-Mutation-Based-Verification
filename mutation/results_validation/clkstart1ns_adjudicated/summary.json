@@ -1,0 +1,461 @@
+{
+ "res": "results_clkstart1ns",
+ "expect_startup": "CLK_START_1NS",
+ "fp": {
+  "gpt": {
+   "compile": "COMPILE_OK",
+   "t0": [],
+   "late": []
+  },
+  "claude": {
+   "compile": "COMPILE_OK",
+   "t0": [],
+   "late": []
+  }
+ },
+ "activation": {
+  "M01_PEND_CLEAR_BEATS_SET": {
+   "diverge": 71,
+   "port": 28,
+   "first_cyc": 84
+  },
+  "M02_OVF_USES_POSTCLEAR_PEND": {
+   "diverge": 76,
+   "port": 1,
+   "first_cyc": 84
+  },
+  "M03_RELOAD_USES_WRITTEN_LOAD": {
+   "diverge": 618,
+   "port": 14,
+   "first_cyc": 128
+  },
+  "M04_SW_EN_BEATS_ONESHOT_COMPLETION": {
+   "diverge": 15,
+   "port": 0,
+   "first_cyc": 213
+  },
+  "M05_LEVEL_SENSITIVE_START": {
+   "diverge": 1196,
+   "port": 125,
+   "first_cyc": 160
+  },
+  "M06_START_KEEPS_PRESCALER_PHASE": {
+   "diverge": 115,
+   "port": 2,
+   "first_cyc": 150
+  },
+  "M07_PRESCALER_EQUALITY_COMPARE": {
+   "diverge": 1187,
+   "port": 373,
+   "first_cyc": 161
+  },
+  "M08_RESTART_REQUIRES_EN": {
+   "diverge": 1158,
+   "port": 40,
+   "first_cyc": 396
+  },
+  "M09_IE_GATES_PEND": {
+   "diverge": 1481,
+   "port": 146,
+   "first_cyc": 53
+  },
+  "M10_IRQ_REGISTERED": {
+   "diverge": 159,
+   "port": 159,
+   "first_cyc": 18
+  }
+ },
+ "cells": {
+  "M01_PEND_CLEAR_BEATS_SET|gpt": {
+   "mutant": "M01_PEND_CLEAR_BEATS_SET",
+   "requirement": "R-PRI-4, R-INT-2",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_4_INT_1_2_5_PEND",
+   "kind": "concurrent",
+   "fail_ns": 855.0,
+   "fail_cycle": 84,
+   "first_div_cycle": 84,
+   "latency_cycles": 0,
+   "new_failures": 26,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M01_PEND_CLEAR_BEATS_SET|claude": {
+   "mutant": "M01_PEND_CLEAR_BEATS_SET",
+   "requirement": "R-PRI-4, R-INT-2",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "INT1_pend_set",
+   "kind": "concurrent",
+   "fail_ns": 855.0,
+   "fail_cycle": 84,
+   "first_div_cycle": 84,
+   "latency_cycles": 0,
+   "new_failures": 42,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M02_OVF_USES_POSTCLEAR_PEND|gpt": {
+   "mutant": "M02_OVF_USES_POSTCLEAR_PEND",
+   "requirement": "R-INT-3",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_5_INT_3_4_5_OVF",
+   "kind": "concurrent",
+   "fail_ns": 855.0,
+   "fail_cycle": 84,
+   "first_div_cycle": 84,
+   "latency_cycles": 0,
+   "new_failures": 18,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M02_OVF_USES_POSTCLEAR_PEND|claude": {
+   "mutant": "M02_OVF_USES_POSTCLEAR_PEND",
+   "requirement": "R-INT-3",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "INT3_ovf_set",
+   "kind": "concurrent",
+   "fail_ns": 855.0,
+   "fail_cycle": 84,
+   "first_div_cycle": 84,
+   "latency_cycles": 0,
+   "new_failures": 33,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M03_RELOAD_USES_WRITTEN_LOAD|gpt": {
+   "mutant": "M03_RELOAD_USES_WRITTEN_LOAD",
+   "requirement": "R-TMR-11",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_3_7_PERIODIC_LOAD_COLLISION",
+   "kind": "concurrent",
+   "fail_ns": 1295.0,
+   "fail_cycle": 128,
+   "first_div_cycle": 128,
+   "latency_cycles": 0,
+   "new_failures": 72,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M03_RELOAD_USES_WRITTEN_LOAD|claude": {
+   "mutant": "M03_RELOAD_USES_WRITTEN_LOAD",
+   "requirement": "R-TMR-11",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "PRI3_periodic_exp_load_write",
+   "kind": "concurrent",
+   "fail_ns": 1295.0,
+   "fail_cycle": 128,
+   "first_div_cycle": 128,
+   "latency_cycles": 0,
+   "new_failures": 48,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M04_SW_EN_BEATS_ONESHOT_COMPLETION|gpt": {
+   "mutant": "M04_SW_EN_BEATS_ONESHOT_COMPLETION",
+   "requirement": "R-PRI-2",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_2_ONESHOT_CTRL_COLLISION",
+   "kind": "concurrent",
+   "fail_ns": 2145.0,
+   "fail_cycle": 213,
+   "first_div_cycle": 213,
+   "latency_cycles": 0,
+   "new_failures": 8,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M04_SW_EN_BEATS_ONESHOT_COMPLETION|claude": {
+   "mutant": "M04_SW_EN_BEATS_ONESHOT_COMPLETION",
+   "requirement": "R-PRI-2",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "PRI2_oneshot_exp_ctrl_en1",
+   "kind": "concurrent",
+   "fail_ns": 2145.0,
+   "fail_cycle": 213,
+   "first_div_cycle": 213,
+   "latency_cycles": 0,
+   "new_failures": 9,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M05_LEVEL_SENSITIVE_START|gpt": {
+   "mutant": "M05_LEVEL_SENSITIVE_START",
+   "requirement": "R-TMR-10, R-TMR-7",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_3_TMR_1_2_7_9_13_PCNT",
+   "kind": "concurrent",
+   "fail_ns": 1615.0,
+   "fail_cycle": 160,
+   "first_div_cycle": 160,
+   "latency_cycles": 0,
+   "new_failures": 116,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M05_LEVEL_SENSITIVE_START|claude": {
+   "mutant": "M05_LEVEL_SENSITIVE_START",
+   "requirement": "R-TMR-10, R-TMR-7",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "TMR10_ctrl_en_no_start",
+   "kind": "concurrent",
+   "fail_ns": 1615.0,
+   "fail_cycle": 160,
+   "first_div_cycle": 160,
+   "latency_cycles": 0,
+   "new_failures": 206,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M06_START_KEEPS_PRESCALER_PHASE|gpt": {
+   "mutant": "M06_START_KEEPS_PRESCALER_PHASE",
+   "requirement": "R-TMR-7",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_3_TMR_1_2_7_9_13_PCNT",
+   "kind": "concurrent",
+   "fail_ns": 1515.0,
+   "fail_cycle": 150,
+   "first_div_cycle": 150,
+   "latency_cycles": 0,
+   "new_failures": 8,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M06_START_KEEPS_PRESCALER_PHASE|claude": {
+   "mutant": "M06_START_KEEPS_PRESCALER_PHASE",
+   "requirement": "R-TMR-7",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "TMR7_TMR9_reload_transfer",
+   "kind": "concurrent",
+   "fail_ns": 1515.0,
+   "fail_cycle": 150,
+   "first_div_cycle": 150,
+   "latency_cycles": 0,
+   "new_failures": 8,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M07_PRESCALER_EQUALITY_COMPARE|gpt": {
+   "mutant": "M07_PRESCALER_EQUALITY_COMPARE",
+   "requirement": "R-TMR-13, R-TMR-1",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_3_TMR_1_2_7_9_13_PCNT",
+   "kind": "concurrent",
+   "fail_ns": 1625.0,
+   "fail_cycle": 161,
+   "first_div_cycle": 161,
+   "latency_cycles": 0,
+   "new_failures": 1619,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M07_PRESCALER_EQUALITY_COMPARE|claude": {
+   "mutant": "M07_PRESCALER_EQUALITY_COMPARE",
+   "requirement": "R-TMR-13, R-TMR-1",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "TMR13_psc_gt_forces_tick",
+   "kind": "concurrent",
+   "fail_ns": 1625.0,
+   "fail_cycle": 161,
+   "first_div_cycle": 161,
+   "latency_cycles": 0,
+   "new_failures": 2716,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M08_RESTART_REQUIRES_EN|gpt": {
+   "mutant": "M08_RESTART_REQUIRES_EN",
+   "requirement": "R-TMR-9",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_3_TMR_2_3_4_5_7_9_ACTIVE",
+   "kind": "concurrent",
+   "fail_ns": 3975.0,
+   "fail_cycle": 396,
+   "first_div_cycle": 396,
+   "latency_cycles": 0,
+   "new_failures": 67,
+   "outside_div": "0",
+   "verdict": "VALID (6 adjudicated blind-spot failures)"
+  },
+  "M08_RESTART_REQUIRES_EN|claude": {
+   "mutant": "M08_RESTART_REQUIRES_EN",
+   "requirement": "R-TMR-9",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "PRI3_restart_while_stopped",
+   "kind": "concurrent",
+   "fail_ns": 3975.0,
+   "fail_cycle": 396,
+   "first_div_cycle": 396,
+   "latency_cycles": 0,
+   "new_failures": 80,
+   "outside_div": "0",
+   "verdict": "VALID (4 adjudicated blind-spot failures)"
+  },
+  "M09_IE_GATES_PEND|gpt": {
+   "mutant": "M09_IE_GATES_PEND",
+   "requirement": "R-INT-7, R-INT-1",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_PRI_4_INT_1_2_5_PEND",
+   "kind": "concurrent",
+   "fail_ns": 545.0,
+   "fail_cycle": 53,
+   "first_div_cycle": 53,
+   "latency_cycles": 0,
+   "new_failures": 216,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M09_IE_GATES_PEND|claude": {
+   "mutant": "M09_IE_GATES_PEND",
+   "requirement": "R-INT-7, R-INT-1",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "APB2_nonacc_flags",
+   "kind": "concurrent",
+   "fail_ns": 545.0,
+   "fail_cycle": 53,
+   "first_div_cycle": 53,
+   "latency_cycles": 0,
+   "new_failures": 653,
+   "outside_div": "0",
+   "verdict": "VALID"
+  },
+  "M10_IRQ_REGISTERED|gpt": {
+   "mutant": "M10_IRQ_REGISTERED",
+   "requirement": "R-INT-6",
+   "activated": "yes",
+   "sva": "gpt",
+   "outcome": "DETECTED",
+   "first_new_failure": "R_INT_6_IRQ",
+   "kind": "immediate/deferred",
+   "fail_ns": 185.0,
+   "fail_cycle": 18,
+   "first_div_cycle": 18,
+   "latency_cycles": 0,
+   "new_failures": 184,
+   "outside_div": "0",
+   "verdict": "VALID (5 adjudicated blind-spot failures)"
+  },
+  "M10_IRQ_REGISTERED|claude": {
+   "mutant": "M10_IRQ_REGISTERED",
+   "requirement": "R-INT-6",
+   "activated": "yes",
+   "sva": "claude",
+   "outcome": "DETECTED",
+   "first_new_failure": "INT6_irq",
+   "kind": "concurrent",
+   "fail_ns": 190.0,
+   "fail_cycle": 18,
+   "first_div_cycle": 18,
+   "latency_cycles": 0,
+   "new_failures": 390,
+   "outside_div": "0",
+   "verdict": "VALID (5 adjudicated blind-spot failures)"
+  }
+ },
+ "integrity": {
+  "ref_check/ref": [],
+  "fp/sva_gpt.ref": [],
+  "fp/sva_claude.ref": [],
+  "activation/M01_PEND_CLEAR_BEATS_SET": [],
+  "detection/sva_gpt/M01_PEND_CLEAR_BEATS_SET": [],
+  "detection/sva_claude/M01_PEND_CLEAR_BEATS_SET": [],
+  "activation/M02_OVF_USES_POSTCLEAR_PEND": [],
+  "detection/sva_gpt/M02_OVF_USES_POSTCLEAR_PEND": [],
+  "detection/sva_claude/M02_OVF_USES_POSTCLEAR_PEND": [],
+  "activation/M03_RELOAD_USES_WRITTEN_LOAD": [],
+  "detection/sva_gpt/M03_RELOAD_USES_WRITTEN_LOAD": [],
+  "detection/sva_claude/M03_RELOAD_USES_WRITTEN_LOAD": [],
+  "activation/M04_SW_EN_BEATS_ONESHOT_COMPLETION": [],
+  "detection/sva_gpt/M04_SW_EN_BEATS_ONESHOT_COMPLETION": [],
+  "detection/sva_claude/M04_SW_EN_BEATS_ONESHOT_COMPLETION": [],
+  "activation/M05_LEVEL_SENSITIVE_START": [],
+  "detection/sva_gpt/M05_LEVEL_SENSITIVE_START": [],
+  "detection/sva_claude/M05_LEVEL_SENSITIVE_START": [],
+  "activation/M06_START_KEEPS_PRESCALER_PHASE": [],
+  "detection/sva_gpt/M06_START_KEEPS_PRESCALER_PHASE": [],
+  "detection/sva_claude/M06_START_KEEPS_PRESCALER_PHASE": [],
+  "activation/M07_PRESCALER_EQUALITY_COMPARE": [],
+  "detection/sva_gpt/M07_PRESCALER_EQUALITY_COMPARE": [],
+  "detection/sva_claude/M07_PRESCALER_EQUALITY_COMPARE": [],
+  "activation/M08_RESTART_REQUIRES_EN": [],
+  "detection/sva_gpt/M08_RESTART_REQUIRES_EN": [],
+  "detection/sva_claude/M08_RESTART_REQUIRES_EN": [],
+  "activation/M09_IE_GATES_PEND": [],
+  "detection/sva_gpt/M09_IE_GATES_PEND": [],
+  "detection/sva_claude/M09_IE_GATES_PEND": [],
+  "activation/M10_IRQ_REGISTERED": [],
+  "detection/sva_gpt/M10_IRQ_REGISTERED": [],
+  "detection/sva_claude/M10_IRQ_REGISTERED": []
+ },
+ "audit": {
+  "pass": true,
+  "checks": [
+   [
+    "Both original SVA sets compiled",
+    true,
+    ""
+   ],
+   [
+    "Every run complete and consistent (33 logs)",
+    true,
+    "0 failing"
+   ],
+   [
+    "All 10 mutants activated",
+    true,
+    "10/10"
+   ],
+   [
+    "Zero baseline SVA failures on the reference",
+    true,
+    "sva_gpt_1: 0, sva_claude_1: 0"
+   ],
+   [
+    "No RUN_ERROR cells",
+    true,
+    "0"
+   ],
+   [
+    "Every detection causally attributable (no SUSPECT)",
+    true,
+    "0 SUSPECT"
+   ]
+  ],
+  "missed": []
+ }
+}

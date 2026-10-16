@@ -1,0 +1,95 @@
+--- ref/apb_timer_refdut.sv
++++ mutants/M01_PEND_CLEAR_BEATS_SET.sv
+@@ -111,5 +111,5 @@
+         end
+         // R-PRI-4 / R-INT-1,2
+-        pend_n = expire ? 1'b1 : ((w_stat & PWDATA[0]) ? 1'b0 : pend);
++        pend_n = (w_stat & PWDATA[0]) ? 1'b0 : (expire ? 1'b1 : pend);
+         // R-PRI-5 / R-INT-3,4 (set condition reads HELD pend)
+         ovf_n  = (expire & pend) ? 1'b1 : ((w_stat & PWDATA[1]) ? 1'b0 : ovf);
+--- ref/apb_timer_refdut.sv
++++ mutants/M02_OVF_USES_POSTCLEAR_PEND.sv
+@@ -113,5 +113,5 @@
+         pend_n = expire ? 1'b1 : ((w_stat & PWDATA[0]) ? 1'b0 : pend);
+         // R-PRI-5 / R-INT-3,4 (set condition reads HELD pend)
+-        ovf_n  = (expire & pend) ? 1'b1 : ((w_stat & PWDATA[1]) ? 1'b0 : ovf);
++        ovf_n  = (expire & pend & ~(w_stat & PWDATA[0])) ? 1'b1 : ((w_stat & PWDATA[1]) ? 1'b0 : ovf);
+     end
+ 
+--- ref/apb_timer_refdut.sv
++++ mutants/M03_RELOAD_USES_WRITTEN_LOAD.sv
+@@ -104,5 +104,5 @@
+             pcnt_n = tick ? 8'd0 : pcnt + 8'd1;          // R-TMR-1
+             if (expire) begin
+-                if (!mode) begin active_n = shadow; count_n = shadow; end  // R-TMR-4
++                if (!mode) begin active_n = shadow_n; count_n = shadow_n; end  // R-TMR-4
+                 // one-shot: COUNT stays 0, ACTIVE unchanged (R-TMR-5)
+             end else if (tick) begin
+--- ref/apb_timer_refdut.sv
++++ mutants/M04_SW_EN_BEATS_ONESHOT_COMPLETION.sv
+@@ -90,6 +90,6 @@
+         shadow_n = w_load ? PWDATA[15:0] : shadow;
+         // R-PRI-2: one-shot completion > CTRL write > hold
+-        if (expire & mode)  en_n = 1'b0;
+-        else if (w_ctrl)    en_n = PWDATA[0];
++        if (w_ctrl)         en_n = PWDATA[0];
++        else if (expire & mode) en_n = 1'b0;
+         else                en_n = en;
+         // R-PRI-3: start/restart > expiration effect > tick/prescaler > hold
+--- ref/apb_timer_refdut.sv
++++ mutants/M05_LEVEL_SENSITIVE_START.sv
+@@ -54,5 +54,5 @@
+     assign tick   = en & (pcnt >= psc);
+     assign expire = tick & (count == 16'd0);
+-    assign start  = w_ctrl & PWDATA[0] & ~en;
++    assign start  = w_ctrl & PWDATA[0];
+     assign rcmd   = w_cmd  & PWDATA[0];
+ 
+--- ref/apb_timer_refdut.sv
++++ mutants/M06_START_KEEPS_PRESCALER_PHASE.sv
+@@ -100,5 +100,5 @@
+             active_n = shadow;          // reload transfer uses held SHADOW
+             count_n  = shadow;
+-            pcnt_n   = 8'd0;
++            pcnt_n   = rcmd ? 8'd0 : pcnt;
+         end else if (en) begin
+             pcnt_n = tick ? 8'd0 : pcnt + 8'd1;          // R-TMR-1
+--- ref/apb_timer_refdut.sv
++++ mutants/M07_PRESCALER_EQUALITY_COMPARE.sv
+@@ -52,5 +52,5 @@
+     // ---------------- events (spec section 8.1) ----------------
+     logic tick, expire, start, rcmd;
+-    assign tick   = en & (pcnt >= psc);
++    assign tick   = en & (pcnt == psc);
+     assign expire = tick & (count == 16'd0);
+     assign start  = w_ctrl & PWDATA[0] & ~en;
+--- ref/apb_timer_refdut.sv
++++ mutants/M08_RESTART_REQUIRES_EN.sv
+@@ -55,5 +55,5 @@
+     assign expire = tick & (count == 16'd0);
+     assign start  = w_ctrl & PWDATA[0] & ~en;
+-    assign rcmd   = w_cmd  & PWDATA[0];
++    assign rcmd   = w_cmd  & PWDATA[0] & en;
+ 
+     // ---------------- outputs (R-APB-3, 6, 7, 8; R-INT-6) ----------------
+--- ref/apb_timer_refdut.sv
++++ mutants/M09_IE_GATES_PEND.sv
+@@ -111,5 +111,5 @@
+         end
+         // R-PRI-4 / R-INT-1,2
+-        pend_n = expire ? 1'b1 : ((w_stat & PWDATA[0]) ? 1'b0 : pend);
++        pend_n = (expire & ie) ? 1'b1 : ((w_stat & PWDATA[0]) ? 1'b0 : pend);
+         // R-PRI-5 / R-INT-3,4 (set condition reads HELD pend)
+         ovf_n  = (expire & pend) ? 1'b1 : ((w_stat & PWDATA[1]) ? 1'b0 : ovf);
+--- ref/apb_timer_refdut.sv
++++ mutants/M10_IRQ_REGISTERED.sv
+@@ -60,5 +60,8 @@
+     assign PREADY  = 1'b1;
+     assign PSLVERR = err;
+-    assign irq     = pend & ie;
++    logic irq_q;
++    always_ff @(posedge PCLK or negedge PRESETn)
++        if (!PRESETn) irq_q <= 1'b0; else irq_q <= pend & ie;
++    assign irq     = irq_q;
+     always_comb begin
+         PRDATA = 32'h0;

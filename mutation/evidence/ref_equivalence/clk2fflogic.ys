@@ -1,0 +1,4 @@
+# ref vs 4 generated RTLs; files are rename + dbg-port instrumented copies only
+read_verilog -sv -formal ref_m.sv rtl_claude_1.sv rtl_claude_2.sv rtl_gpt_1.sv rtl_gpt_2.sv top.sv
+prep -top top; flatten; clk2fflogic; opt -fast; opt_clean
+sat -set-init-zero -tempinduct -seq 1 -maxsteps 8 -prove-asserts -verify -timeout 600
