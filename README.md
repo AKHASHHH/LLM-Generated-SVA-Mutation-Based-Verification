@@ -41,7 +41,7 @@ The scope is deliberately controlled: **one APB timer specification, two model f
 
 ## Verification architecture
 
-\`\`\`mermaid
+```mermaid
 flowchart TD
     S["Frozen APBTMR specification"] --> G["Isolated LLM generation"]
     S --> O["Spec-model / reference-model workflow"]
@@ -61,7 +61,7 @@ flowchart TD
     A --> H["Supplemental H1/H2 port-only checks"]
     D --> H
     H --> F["Independent reference / mutant validation"]
-\`\`\`
+```
 
 *Diagram shows the complete study, not a claim that the original LLM checkers and the reference were independently human-designed.*
 
@@ -69,17 +69,17 @@ flowchart TD
 
 The DUT implements a register-mapped timer with programmable prescaling, periodic/one-shot operation, restart behavior and sticky interrupt status. Its externally accessible signals are:
 
-\`PCLK\`, \`PRESETn\`, \`PSEL\`, \`PENABLE\`, \`PWRITE\`, \`PADDR\`, \`PWDATA\`, \`PRDATA\`, \`PREADY\`, \`PSLVERR\`, and \`irq\`.
+`PCLK`, `PRESETn`, `PSEL`, `PENABLE`, `PWRITE`, `PADDR`, `PWDATA`, `PRDATA`, `PREADY`, `PSLVERR`, and `irq`.
 
 | Offset | Register | Purpose |
 |:--|:--|:--|
-| \`0x00\` | \`CTRL\` | Enable, mode, interrupt enable, prescaler configuration |
-| \`0x04\` | \`LOAD\` | Timer reload/shadow value |
-| \`0x08\` | \`COUNT\` | Current timer counter |
-| \`0x0C\` | \`STATUS\` | Pending and overflow status; write-one-to-clear |
-| \`0x10\` | \`CMD\` | Restart command |
-| \`0x14\` | \`ACTIVE\` | Active reload value |
-| \`0x18\` | \`PSCNT\` | Prescaler phase/count readback |
+| `0x00` | `CTRL` | Enable, mode, interrupt enable, prescaler configuration |
+| `0x04` | `LOAD` | Timer reload/shadow value |
+| `0x08` | `COUNT` | Current timer counter |
+| `0x0C` | `STATUS` | Pending and overflow status; write-one-to-clear |
+| `0x10` | `CMD` | Restart command |
+| `0x14` | `ACTIVE` | Active reload value |
+| `0x18` | `PSCNT` | Prescaler phase/count readback |
 
 The full timing, collision-priority, reset and read/write rules are defined in the [frozen specification](spec/APBTMR_SPEC_v1.0.md), rather than inferred from a DUT implementation.
 
@@ -88,7 +88,7 @@ The full timing, collision-priority, reset and read/write rules are defined in t
 | Dimension | White-box contract | Black-box contract |
 |:--|:--|:--|
 | Visibility | APB ports **and internal architectural state** | **11 external DUT ports only** |
-| Internal \`EN/PSC/COUNT/PCNT/PEND\` | Observable | Not observable |
+| Internal `EN/PSC/COUNT/PCNT/PEND` | Observable | Not observable |
 | Checker-local history | Allowed | Allowed if derived from ports |
 | Procedural countdown / next-state model | Not restricted in the same way | Explicitly prohibited |
 | Source | [GPT](gen/sva_gpt_1.sv), [Claude](gen/sva_claude_1.sv) | [GPT](mutation/blackbox/gen/sva_bb_gpt_1.sv), [Claude](mutation/blackbox/gen/sva_bb_claude_1.sv) |
@@ -97,7 +97,7 @@ The full timing, collision-priority, reset and read/write rules are defined in t
 
 ## Experimental methodology
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     A["Freeze specification + original checkers (SHA-256)"] --> B["Validate reference and 8,348-cycle vectors"]
     B --> C["Compile checkers and run correct reference"]
@@ -106,16 +106,16 @@ flowchart LR
     E --> F["Attribute failures against baseline and divergence"]
     F --> G["Adjudicate sampling blind spots"]
     G --> H["Inspect URG / debug Verdi / report limitations"]
-\`\`\`
+```
 
 1. **Freeze:** Preserve first-pass generated files and prompts under SHA-256 manifests. Original checker sources are never silently patched.
 2. **Baseline:** Run the correct reference with each checker. Record compilation, completed cycles, assertion failures and model/reference consistency.
 3. **Activate:** Inject exactly one controlled defect per mutant and verify it causes a state and/or port divergence under the fixed stimulus.
 4. **Detect:** Compare each mutant run's assertion failures with the corresponding clean reference run. An assertion *passing* the reference is not a detection.
 5. **Audit:** Check run completion, checker binding, startup configuration, first detection, divergence attribution and any scoreboard sampling blind spots.
-6. **Inspect:** Measure assertion exercise using VCS \`-cm assert\` / URG and debug representative misses and detections in Verdi.
+6. **Inspect:** Measure assertion exercise using VCS `-cm assert` / URG and debug representative misses and detections in Verdi.
 
-The audited white-box flow used \`+define+CLK_START_1NS\` to eliminate a misleading time-zero clock-port event. The original testbench and audit documents record that investigation: [time-zero experiment](mutation/docs/TIME0_EXPERIMENT.md) and [clock-startup validation](mutation/docs/PHASE_B_CLKSTART1NS.md).
+The audited white-box flow used `+define+CLK_START_1NS` to eliminate a misleading time-zero clock-port event. The original testbench and audit documents record that investigation: [time-zero experiment](mutation/docs/TIME0_EXPERIMENT.md) and [clock-startup validation](mutation/docs/PHASE_B_CLKSTART1NS.md).
 
 <details>
 <summary><strong>Important audit detail: scoreboard sampling blind spots</strong></summary>
@@ -138,7 +138,7 @@ Each mutant alters **one intended behavior** in the reference-derived RTL. These
 | M04 | Software EN beats one-shot completion | **0** | ✅ | ✅ | N/O | N/O |
 | M05 | Start treated as level-sensitive | 125 | ✅ | ✅ | ❌ | ❌ |
 | M06 | Start preserves stale prescaler phase | 2 | ✅ | ✅ | ❌ | ❌ |
-| M07 | Prescaler uses \`==\` instead of \`>=\` | 373 | ✅ | ✅ | ❌ | ❌ |
+| M07 | Prescaler uses `==` instead of `>=` | 373 | ✅ | ✅ | ❌ | ❌ |
 | M08 | Restart incorrectly requires EN | 40 | ✅ | ✅ | ❌ | ✅ |
 | M09 | IE incorrectly gates PEND | 146 | ✅ | ✅ | ❌ | ❌ |
 | M10 | IRQ incorrectly registered by one cycle | 159 | ✅ | ✅ | ✅ | ✅ |
@@ -147,13 +147,13 @@ Each mutant alters **one intended behavior** in the reference-derived RTL. These
 
 ### Detection-rate comparison
 
-\`\`\`mermaid
+```mermaid
 xychart-beta
     title "Detected / eligible mutants"
     x-axis ["WB GPT", "WB Claude", "BB GPT", "BB Claude"]
     y-axis "Detected mutants" 0 --> 10
     bar [10, 10, 1, 2]
-\`\`\`
+```
 
 The chart shows **counts**, with denominators **10, 10, 9 and 9**, respectively. It is descriptive, not a statistically powered comparison. Read the [detailed detection matrix](mutation/blackbox/results/bb_matrix.md) for detection labels, cycles and latency.
 
@@ -191,13 +191,13 @@ The Claude white-box checker also contains **11 cover properties**, all reached 
 
 </details>
 
-The **two GPT black-box properties with no successes** are \`R_RST_2\` and \`R_RST_4_READ\`. The **six Claude black-box properties with no successes** are \`R_TMR_3\`, \`R_TMR_4\`, \`R_TMR_11\`, \`R_TMR_7_COUNT\`, \`R_TMR_7_EN\`, and \`R_TMR_7_PSCNT\`. This agrees with the project's separate model-replay analysis; the URG measurements are the simulator-backed evidence.
+The **two GPT black-box properties with no successes** are `R_RST_2` and `R_RST_4_READ`. The **six Claude black-box properties with no successes** are `R_TMR_3`, `R_TMR_4`, `R_TMR_11`, `R_TMR_7_COUNT`, `R_TMR_7_EN`, and `R_TMR_7_PSCNT`. This agrees with the project's separate model-replay analysis; the URG measurements are the simulator-backed evidence.
 
 ## Waveform debugging case studies
 
 ### M07: Prescaler comparison misses a tick
 
-**Fault:** \`pcnt == psc\` replaces the specified \`pcnt >= psc\`. If software lowers PSC after PCNT has passed the new threshold, an equality-only comparison can miss the expected tick.
+**Fault:** `pcnt == psc` replaces the specified `pcnt >= psc`. If software lowers PSC after PCNT has passed the new threshold, an equality-only comparison can miss the expected tick.
 
 **Verdi observation:** The mutant's PCNT continues past the threshold while the reference resets PCNT and advances the countdown. A later PEND/IRQ difference makes the internal timing error externally visible. M07 has **373 port-divergent sampled cycles**, yet neither original black-box checker detected it.
 
@@ -213,13 +213,13 @@ The **two GPT black-box properties with no successes** are \`R_RST_2\` and \`R_R
 
 ![M09 STATUS register readback difference](mutation/docs/evidence/waveforms/m09_status_apb_readback_mismatch_verdi.png)
 
-**Why a simple check missed it:** A property like \`irq == PEND && IE\` can still hold when **PEND itself is wrong**. Port consistency is weaker than independently checking *why* PEND should have been asserted. See the [M07/M09 root-cause investigation](mutation/blackbox/docs/RCA_M07_M09.md).
+**Why a simple check missed it:** A property like `irq == PEND && IE` can still hold when **PEND itself is wrong**. Port consistency is weaker than independently checking *why* PEND should have been asserted. See the [M07/M09 root-cause investigation](mutation/blackbox/docs/RCA_M07_M09.md).
 
 ### M10: Registered IRQ violates combinational timing
 
-**Fault:** The mutant registers IRQ rather than directly reflecting \`PEND && IE\`, introducing a clock-cycle delay.
+**Fault:** The mutant registers IRQ rather than directly reflecting `PEND && IE`, introducing a clock-cycle delay.
 
-**Verdi / VCS observation:** The white-box Claude \`INT6_irq\` assertion detected M10 at approximately **190 ns**, in the first divergent test cycle. The original black-box suites detected this mutant later under different port-only properties.
+**Verdi / VCS observation:** The white-box Claude `INT6_irq` assertion detected M10 at approximately **190 ns**, in the first divergent test cycle. The original black-box suites detected this mutant later under different port-only properties.
 
 ![M10 registered IRQ timing mismatch](mutation/docs/evidence/waveforms/m10_registered_irq_latency_verdi.png)
 
@@ -229,8 +229,8 @@ After freezing and measuring the original four checker suites, two **AI-assisted
 
 | Property | Port-derived check | Target mutant | Correct reference | Mutant |
 |:--|:--|:--|:--|:--|
-| \`H1_prescaler_bound\` | Guarded PSCNT readback does not exceed tracked PSC | M07 | **0 failures; 62 real successes** | **6 failures** |
-| \`H2_pending_mask_independence\` | Known one-shot expiration followed by IE enable must assert IRQ | M09 | **0 failures; 31 real successes** | **14 failures** |
+| `H1_prescaler_bound` | Guarded PSCNT readback does not exceed tracked PSC | M07 | **0 failures; 62 real successes** | **6 failures** |
+| `H2_pending_mask_independence` | Known one-shot expiration followed by IE enable must assert IRQ | M09 | **0 failures; 31 real successes** | **14 failures** |
 
 The combined H1/H2 reference run completed **8,348 vector cycles** with no specification mismatches and no reported assertion failures.
 
@@ -242,18 +242,18 @@ See [supplemental SystemVerilog source](mutation/engineer_sva/engineer_sva.sv) a
 
 | Path | Contents |
 |:--|:--|
-| [\`spec/\`](spec/) | Frozen timer requirements and specification hash |
-| [\`gen/\`](gen/) | Generated RTL, original white-box assertions, generation metadata and manifests |
-| [\`mutation/ref/\`](mutation/ref/) | Reference behavioral RTL and same-interface DUT wrapper |
-| [\`mutation/mutants/\`](mutation/mutants/) | All 10 controlled defect implementations and exact edits |
-| [\`mutation/vectors/\`](mutation/vectors/) | 81-test / 8,348-cycle vector stream and test index |
-| [\`mutation/tb/\`](mutation/tb/) | Differential testbench, reference comparison and optional SVA hook |
-| [\`mutation/scripts/\`](mutation/scripts/) | Mutation generation, simulator runners, matrix/audit processing |
-| [\`mutation/blackbox/\`](mutation/blackbox/) | Original port-only generation, hashes, run scripts, analysis and results |
-| [\`mutation/engineer_sva/\`](mutation/engineer_sva/) | Post-experiment H1/H2 assertions and logs |
-| [\`mutation/results_validation/\`](mutation/results_validation/) | Audited original white-box detection report |
-| [\`mutation/docs/evidence/\`](mutation/docs/evidence/) | URG captures and Verdi case-study screenshots |
-| [\`docs/historical/\`](docs/historical/) | Original package README, preserved as historical setup material |
+| [`spec/`](spec/) | Frozen timer requirements and specification hash |
+| [`gen/`](gen/) | Generated RTL, original white-box assertions, generation metadata and manifests |
+| [`mutation/ref/`](mutation/ref/) | Reference behavioral RTL and same-interface DUT wrapper |
+| [`mutation/mutants/`](mutation/mutants/) | All 10 controlled defect implementations and exact edits |
+| [`mutation/vectors/`](mutation/vectors/) | 81-test / 8,348-cycle vector stream and test index |
+| [`mutation/tb/`](mutation/tb/) | Differential testbench, reference comparison and optional SVA hook |
+| [`mutation/scripts/`](mutation/scripts/) | Mutation generation, simulator runners, matrix/audit processing |
+| [`mutation/blackbox/`](mutation/blackbox/) | Original port-only generation, hashes, run scripts, analysis and results |
+| [`mutation/engineer_sva/`](mutation/engineer_sva/) | Post-experiment H1/H2 assertions and logs |
+| [`mutation/results_validation/`](mutation/results_validation/) | Audited original white-box detection report |
+| [`mutation/docs/evidence/`](mutation/docs/evidence/) | URG captures and Verdi case-study screenshots |
+| [`docs/historical/`](docs/historical/) | Original package README, preserved as historical setup material |
 
 ## Reproducing the experiments
 
@@ -261,25 +261,25 @@ See [supplemental SystemVerilog source](mutation/engineer_sva/engineer_sva.sv) a
 
 From the **repository root**, verify the immutable source artifacts:
 
-\`\`\`bash
+```bash
 sha256sum -c gen/GEN_MANIFEST.sha256
 (cd mutation && sha256sum -c docs/gen_sha256.txt)
 (cd mutation/blackbox && sha256sum -c gen/bb_sha256.txt)
 (cd spec && sha256sum -c SPEC_FREEZE.sha256)
-\`\`\`
+```
 
-From \`mutation/\`, run the corrected white-box flow:
+From `mutation/`, run the corrected white-box flow:
 
-\`\`\`bash
+```bash
 cd mutation
 export TB_DEFINES="+define+CLK_START_1NS"
 ./scripts/run_ref_check.sh
 ./scripts/run_all.sh
-\`\`\`
+```
 
-For the independent black-box checker flow, consult [the black-box runner instructions](mutation/blackbox/docs/RUNNER.md) and its frozen [generation prompt](mutation/blackbox/prompt/BB_PROMPT.txt). Use \`mutation/blackbox/scripts/run_bb.sh\` with the documented run-mode arguments; don't substitute black-box checkers into the white-box-only \`WITH_SVA\` hook.
+For the independent black-box checker flow, consult [the black-box runner instructions](mutation/blackbox/docs/RUNNER.md) and its frozen [generation prompt](mutation/blackbox/prompt/BB_PROMPT.txt). Use `mutation/blackbox/scripts/run_bb.sh` with the documented run-mode arguments; don't substitute black-box checkers into the white-box-only `WITH_SVA` hook.
 
-**Important:** The archived [initial mutation package README](docs/historical/INITIAL_MUTATION_README.md) describes a *pre-VCS* delivery state. It is preserved for provenance, **not** a current results statement. The final adjudicated matrices linked above are authoritative. Large \`simv\`, \`.vdb\`, \`.fsdb\` and \`.vcd\` build products are intentionally excluded from this repository.
+**Important:** The archived [initial mutation package README](docs/historical/INITIAL_MUTATION_README.md) describes a *pre-VCS* delivery state. It is preserved for provenance, **not** a current results statement. The final adjudicated matrices linked above are authoritative. Large `simv`, `.vdb`, `.fsdb` and `.vcd` build products are intentionally excluded from this repository.
 
 <details>
 <summary><strong>Generation integrity and provenance</strong></summary>
