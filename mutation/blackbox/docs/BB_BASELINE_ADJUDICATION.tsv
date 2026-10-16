@@ -1,0 +1,4 @@
+# Explanations for black-box checker failures on the REFERENCE (baseline). Empty unless the baseline gate fails.
+# One line per failing label, tab-separated: checker<TAB>label<TAB>classification<TAB>reason (spec R-ID, failing time)
+# classification: checker-defect (false positive, natural finding) | harness (fix the harness, never the checker)
+# A label listed here lets mutation runs proceed; detection stays net of that checker's baseline (label, time).

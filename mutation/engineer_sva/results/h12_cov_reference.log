@@ -1,0 +1,93 @@
+Command: /home/ad7252/Documents/Akhash_Projects/Project_4/v2/mutation/engineer_sva/build/h12_cov_reference/./simv +VEC=../../../vectors/all.vec -cm assert -l ../../results/h12_cov_reference.log
+Chronologic VCS simulator copyright 1991-2026
+Contains Synopsys proprietary information.
+Compiler version Y-2026.03_Full64; Runtime version Y-2026.03_Full64;  Oct 16 16:52 2026
+TBCONFIG clock_startup=CLK_START_1NS
+TBTEST tid=0 time=10ns cyc=0
+TBTEST tid=1 time=110ns cyc=10
+TBTEST tid=2 time=230ns cyc=22
+TBTEST tid=3 time=370ns cyc=36
+TBTEST tid=4 time=480ns cyc=47
+TBTEST tid=5 time=590ns cyc=58
+TBTEST tid=6 time=720ns cyc=71
+TBTEST tid=7 time=880ns cyc=87
+TBTEST tid=8 time=1070ns cyc=106
+TBTEST tid=9 time=1210ns cyc=120
+TBTEST tid=10 time=1360ns cyc=135
+TBTEST tid=11 time=1530ns cyc=152
+TBTEST tid=12 time=1650ns cyc=164
+TBTEST tid=13 time=1770ns cyc=176
+TBTEST tid=14 time=1930ns cyc=192
+TBTEST tid=15 time=2070ns cyc=206
+TBTEST tid=16 time=2170ns cyc=216
+TBTEST tid=17 time=2290ns cyc=228
+TBTEST tid=18 time=2410ns cyc=240
+TBTEST tid=19 time=2520ns cyc=251
+TBTEST tid=20 time=2650ns cyc=264
+TBTEST tid=21 time=2760ns cyc=275
+TBTEST tid=22 time=2920ns cyc=291
+TBTEST tid=23 time=3070ns cyc=306
+TBTEST tid=24 time=3200ns cyc=319
+TBTEST tid=25 time=3530ns cyc=352
+TBTEST tid=26 time=3680ns cyc=367
+TBTEST tid=27 time=3810ns cyc=380
+TBTEST tid=28 time=3920ns cyc=391
+TBTEST tid=29 time=4090ns cyc=408
+TBTEST tid=30 time=4300ns cyc=429
+TBTEST tid=31 time=4510ns cyc=450
+TBTEST tid=32 time=4650ns cyc=464
+TBTEST tid=33 time=4800ns cyc=479
+TBTEST tid=34 time=5050ns cyc=504
+TBTEST tid=35 time=5240ns cyc=523
+TBTEST tid=36 time=10530ns cyc=1052
+TBTEST tid=37 time=10700ns cyc=1069
+TBTEST tid=38 time=10850ns cyc=1084
+TBTEST tid=39 time=10990ns cyc=1098
+TBTEST tid=40 time=11230ns cyc=1122
+TBTEST tid=41 time=11390ns cyc=1138
+TBTEST tid=42 time=13980ns cyc=1397
+TBTEST tid=43 time=15710ns cyc=1570
+TBTEST tid=44 time=17580ns cyc=1757
+TBTEST tid=45 time=19850ns cyc=1984
+TBTEST tid=46 time=22000ns cyc=2199
+TBTEST tid=47 time=23660ns cyc=2365
+TBTEST tid=48 time=25900ns cyc=2589
+TBTEST tid=49 time=27950ns cyc=2794
+TBTEST tid=50 time=29430ns cyc=2942
+TBTEST tid=51 time=31040ns cyc=3103
+TBTEST tid=52 time=32380ns cyc=3237
+TBTEST tid=53 time=34110ns cyc=3410
+TBTEST tid=54 time=35470ns cyc=3546
+TBTEST tid=55 time=37470ns cyc=3746
+TBTEST tid=56 time=38920ns cyc=3891
+TBTEST tid=57 time=40400ns cyc=4039
+TBTEST tid=58 time=42330ns cyc=4232
+TBTEST tid=59 time=44750ns cyc=4474
+TBTEST tid=60 time=46530ns cyc=4652
+TBTEST tid=61 time=47920ns cyc=4791
+TBTEST tid=62 time=50310ns cyc=5030
+TBTEST tid=63 time=52060ns cyc=5205
+TBTEST tid=64 time=53920ns cyc=5391
+TBTEST tid=65 time=55370ns cyc=5536
+TBTEST tid=66 time=57580ns cyc=5757
+TBTEST tid=67 time=59680ns cyc=5967
+TBTEST tid=68 time=61500ns cyc=6149
+TBTEST tid=69 time=62830ns cyc=6282
+TBTEST tid=70 time=64490ns cyc=6448
+TBTEST tid=71 time=65800ns cyc=6579
+TBTEST tid=72 time=67170ns cyc=6716
+TBTEST tid=73 time=69070ns cyc=6906
+TBTEST tid=74 time=70880ns cyc=7087
+TBTEST tid=75 time=73100ns cyc=7309
+TBTEST tid=76 time=74660ns cyc=7465
+TBTEST tid=77 time=76080ns cyc=7607
+TBTEST tid=78 time=77390ns cyc=7738
+TBTEST tid=79 time=79560ns cyc=7955
+TBTEST tid=80 time=81160ns cyc=8115
+TBSUMMARY vecfile=../../../vectors/all.vec cycles=8348 spec_mismatch_cycles=0 ref_diverge_cycles=0 ref_diverge_port_cycles=0 first_diverge_cyc=-1 first_diverge_tid=-1 first_diverge_time=0ns ref_spec_mismatch_cycles=0
+$finish called from file "/home/ad7252/Documents/Akhash_Projects/Project_4/v2/mutation/tb/tb_top.sv", line 261.
+$finish at simulation time 83510ns
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 83510000 ps
+CPU Time:      0.410 seconds;       Data structure size:   0.0Mb
+Fri Oct 16 16:52:56 2026

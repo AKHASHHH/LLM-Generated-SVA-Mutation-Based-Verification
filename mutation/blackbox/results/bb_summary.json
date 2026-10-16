@@ -1,0 +1,78 @@
+{
+ "cells": {
+  "M01_PEND_CLEAR_BEATS_SET|gpt": "MISSED",
+  "M01_PEND_CLEAR_BEATS_SET|claude": "MISSED",
+  "M02_OVF_USES_POSTCLEAR_PEND|gpt": "MISSED",
+  "M02_OVF_USES_POSTCLEAR_PEND|claude": "MISSED",
+  "M03_RELOAD_USES_WRITTEN_LOAD|gpt": "MISSED",
+  "M03_RELOAD_USES_WRITTEN_LOAD|claude": "MISSED",
+  "M04_SW_EN_BEATS_ONESHOT_COMPLETION|gpt": "NOT_OBSERVABLE",
+  "M04_SW_EN_BEATS_ONESHOT_COMPLETION|claude": "NOT_OBSERVABLE",
+  "M05_LEVEL_SENSITIVE_START|gpt": "MISSED",
+  "M05_LEVEL_SENSITIVE_START|claude": "MISSED",
+  "M06_START_KEEPS_PRESCALER_PHASE|gpt": "MISSED",
+  "M06_START_KEEPS_PRESCALER_PHASE|claude": "MISSED",
+  "M07_PRESCALER_EQUALITY_COMPARE|gpt": "MISSED",
+  "M07_PRESCALER_EQUALITY_COMPARE|claude": "MISSED",
+  "M08_RESTART_REQUIRES_EN|gpt": "MISSED",
+  "M08_RESTART_REQUIRES_EN|claude": "DETECTED: R_TMR_9_COUNT (cycle 4924)",
+  "M09_IE_GATES_PEND|gpt": "MISSED",
+  "M09_IE_GATES_PEND|claude": "MISSED",
+  "M10_IRQ_REGISTERED|gpt": "DETECTED: R_INT_6 (cycle 5766)",
+  "M10_IRQ_REGISTERED|claude": "DETECTED: R_INT_2_FALL (cycle 70)"
+ },
+ "tally": {
+  "gpt": {
+   "DETECTED": 1,
+   "MISSED": 8,
+   "SUSPECT": 0,
+   "NOT_OBSERVABLE": 1,
+   "NO_FAIL": 0
+  },
+  "claude": {
+   "DETECTED": 2,
+   "MISSED": 7,
+   "SUSPECT": 0,
+   "NOT_OBSERVABLE": 1,
+   "NO_FAIL": 0
+  }
+ },
+ "audit": true,
+ "checks": [
+  [
+   "Isolation PASS for both checkers",
+   true,
+   "gpt: PASS, claude: PASS"
+  ],
+  [
+   "Both checkers compiled in the TB",
+   true,
+   "gpt: COMPILE_OK, claude: COMPILE_OK"
+  ],
+  [
+   "Baseline gate passed (zero or explained failures)",
+   true,
+   "gpt: PASS (0 failures), claude: PASS (0 failures)"
+  ],
+  [
+   "Every run complete and consistent (22 logs)",
+   true,
+   "0 failing"
+  ],
+  [
+   "Audited activation data present for all 10 mutants",
+   true,
+   ""
+  ],
+  [
+   "No RUN_ERROR cells",
+   true,
+   "0"
+  ],
+  [
+   "No SUSPECT cells",
+   true,
+   "0 SUSPECT"
+  ]
+ ]
+}
