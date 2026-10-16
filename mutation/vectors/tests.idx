@@ -1,0 +1,82 @@
+# tid name cycles description
+0 EX01 10 Spec example 1: Reset values and basic reads
+1 EX02 12 Spec example 2: Periodic start, PSC=0, LOAD=2
+2 EX03 14 Spec example 3: Prescaler PSC=2
+3 EX04 11 Spec example 4: One-shot completion
+4 EX05 11 Spec example 5: Interrupt mask does not gate PEND
+5 EX06 13 Spec example 6: W1C semantics of STATUS
+6 EX07 16 Spec example 7: W1C of PEND in the same cycle as an expiration
+7 EX08 19 Spec example 8: Clearing PEND and OVF together
+8 EX09 14 Spec example 9: SHADOW write while running (non-coincident)
+9 EX10 15 Spec example 10: SHADOW write coincident with periodic expiration
+10 EX11 17 Spec example 11: Stop, then enable again (restart, not resume)
+11 EX12 12 Spec example 12: CTRL write with EN=1 while already enabled is not a start
+12 EX13 12 Spec example 13: Lowering PSC below the current PCNT
+13 EX14 16 Spec example 14: RESTART command while running
+14 EX15 14 Spec example 15: RESTART coincident with one-shot expiration
+15 EX16 10 Spec example 16: CTRL write with EN=1 coincident with one-shot expiration
+16 EX17 12 Spec example 17: Switching periodic to one-shot while running
+17 EX18 12 Spec example 18: Switching to one-shot in the same cycle as an expiration
+18 EX19 11 Spec example 19: Disabling in the same cycle as a periodic expiration
+19 EX20 13 Spec example 20: APB error and decode cases
+20 EX21 11 Spec example 21: LOAD=0 in periodic mode
+21 EX22 16 Spec example 22: Asynchronous reset during operation
+22 EX23 15 Spec example 23: Readback of internal state while running
+23 D01_W1C_AT_EXP_PEND0 13 STATUS W1C coincident with first expiration (PEND=0): PEND=1, OVF=0 (R-PRI-4, R-INT-3)
+24 D02_OVF_CLR_AT_EXP 33 OVF W1C at expiration with PEND=0 (clears) and with PEND=1 (set wins) (R-PRI-5, R-INT-3/4)
+25 D03_CONT_EXP_CLEARS 15 LOAD=0, PSC=0 periodic: expiration every cycle, repeated STATUS=0x3 never clears (R-PRI-4/5)
+26 D04_ONESHOT_MODE0_AT_COMPLETION 13 One-shot completion coincident with CTRL write EN=1,MODE=0: EN=0, COUNT stays 0 (R-PRI-2, R-TMR-12)
+27 D05_TICK_WITH_EN0 11 Non-expiring tick coincident with CTRL EN=0: decrement still happens (R-TMR-8)
+28 D06_RESTART_WHILE_STOPPED 17 CMD.RESTART with EN=0 reloads but stays stopped; later start reloads newer SHADOW (R-TMR-9, R-TMR-7)
+29 D07_RESTART_AT_PERIODIC_EXP 21 RESTART coincident with periodic expiration after SHADOW rewrite (R-TMR-9, R-PRI-3)
+30 D08_IE_TOGGLE 21 Expiration with IE=0 then IE=1 (sticky PEND); IE=0 written at an expiration (R-INT-6/7, R-TMR-12)
+31 D09_BACK_TO_BACK_ACCESS 14 Consecutive access cycles without setup: W LOAD, R LOAD, W CMD (R-APB-1)  [non-standard APB]
+32 D10_ERRORED_ACCESS_AT_EXP 15 Write to RO COUNT coincident with expiration; unmapped write and read (R-APB-8/9)
+33 D11_LOAD0_PSC3 25 LOAD=0 with PSC=3: one-shot completes on first tick; periodic expires every 4 cycles (R-TMR-4/5)
+34 D12_RESET_DURING_ACCESS 19 Async reset asserted during a write access cycle with irq=1; write lost (R-RST-1/2/3)
+35 D13_PSC_255 529 PSC=255: tick every 256 enabled cycles, PSCNT readback near 255 (R-TMR-1)
+36 D14_RESERVED_AND_ALIASES 17 Reserved CTRL bits read 0; CMD read is 0 without error; PADDR[1:0] aliases (R-APB-4/5/6)
+37 D15_BUS_NOISE 15 Non-access bus activity has no effect; PRDATA=0, PSLVERR=0 (R-APB-2/7/8)
+38 D16_SHADOW_FFFF 14 SHADOW=0xFFFF: COUNT runs down from 65535 (R-TMR-3 boundary)
+39 D17_PSC_RAISE_MIDINTERVAL 24 Raising PSC mid-interval (PCNT=2 of PSC=3 -> PSC=6) extends the interval; PCNT not cleared (R-TMR-12/13)
+40 D18_START_KEEPS_FLAGS 16 Stop then start: PEND/OVF preserved across a start (R-TMR-7)
+41 RND00 259 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+42 RND01 173 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+43 RND02 187 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+44 RND03 227 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+45 RND04 215 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+46 RND05 166 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+47 RND06 224 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+48 RND07 205 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+49 RND08 148 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+50 RND09 161 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+51 RND10 134 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+52 RND11 173 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+53 RND12 136 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+54 RND13 200 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+55 RND14 145 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+56 RND15 148 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+57 RND16 193 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+58 RND17 242 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+59 RND18 178 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+60 RND19 139 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+61 RND20 239 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+62 RND21 175 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+63 RND22 186 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+64 RND23 145 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+65 RND24 221 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+66 RND25 210 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+67 RND26 182 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+68 RND27 133 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+69 RND28 166 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+70 RND29 131 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+71 RND30 137 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+72 RND31 190 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+73 RND32 181 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+74 RND33 222 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+75 RND34 156 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+76 RND35 142 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+77 RND36 131 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+78 RND37 217 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+79 RND38 160 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
+80 RND39 233 Seeded random smoke (seed 20261015), legal APB plus occasional back-to-back access
