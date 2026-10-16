@@ -263,12 +263,12 @@ From the **repository root**, verify the immutable source artifacts:
 
 ```bash
 sha256sum -c gen/GEN_MANIFEST.sha256
-(cd mutation && sha256sum -c docs/gen_sha256.txt)
+(cd gen && sha256sum -c ../mutation/docs/gen_sha256.txt)
 (cd mutation/blackbox && sha256sum -c gen/bb_sha256.txt)
 (cd spec && sha256sum -c SPEC_FREEZE.sha256)
 ```
 
-From `mutation/`, run the corrected white-box flow:
+From `mutation/`, run the corrected white-box flow (scripts produce fresh results under `mutation/results/`):
 
 ```bash
 cd mutation
